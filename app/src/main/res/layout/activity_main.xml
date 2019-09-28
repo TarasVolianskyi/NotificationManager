@@ -13,167 +13,233 @@
         android:orientation="horizontal">
 
 
-
-
-
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="sendOnChannel1"
-                android:text="Send on Channel 1" />
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="sendOnChannel2"
-                android:text="Send on Channel 2" />
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:gravity="center">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_test_text" />
 
                 <Button
-                    android:id="@+id/btn_start_main_activity"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Start"
+                    android:onClick="sendOnChannel1"
+                    android:text="Send on Channel 1" />
 
-                    android:background="@drawable/shape_drawable"
-                    android:textColor="@color/colorPrimary"
-                    android:padding="12dp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="50dp" />
-
-
-
-            <Button
-                android:id="@+id/btn_pause_main_activity"
-                android:layout_width="match_parent"
-                android:layout_height="90dp"
-                android:text="Pause"
-                android:padding="20dp"
-                android:background="@drawable/gradient_list" />
-
-            <EditText
-                android:id="@+id/edit_text_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Title" />
-
-            <EditText
-                android:id="@+id/edit_text_message"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Message" />
-
-
-
-            <LinearLayout
-                android:id="@+id/layout_start_main_activit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="invisible">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="sendOnChannel2"
+                    android:text="Send on Channel 2" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center">
 
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1" />
 
                     <Button
-                        android:id="@+id/btn_minus_main_activity"
-                        android:layout_width="0dp"
+                        android:id="@+id/btn_start_main_activity"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="-" />
+                        android:text="Start"
+                        android:background="@drawable/shape_drawable"
+                        android:textColor="@color/colorPrimary"
+                        android:padding="12dp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp" />
+
+
+                <Button
+                    android:id="@+id/btn_pause_main_activity"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:text="Pause"
+                    android:padding="20dp"
+                    android:background="@drawable/gradient_list" />
+
+                <EditText
+                    android:id="@+id/edit_text_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Title" />
+
+                <EditText
+                    android:id="@+id/edit_text_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Message" />
+
+
+
+
+
+                <LinearLayout
+                    android:id="@+id/layout_start_main_activit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/gradient_list"
+                    android:visibility="invisible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <Button
+                            android:id="@+id/btn_minus_main_activity"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="-" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:lineSpacingExtra="36sp"
+                            android:text="3"
+                            android:textSize="36sp"
+                            android:textStyle="bold|italic"
+                            android:typeface="normal"
+                            app:fontFamily="serif" />
+
+                        <Button
+                            android:id="@+id/btn_plus_main_activity"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="+" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+
+
+                    <SeekBar
+                        android:id="@+id/seekBar2"
+                        style="@style/Widget.AppCompat.SeekBar.Discrete"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="10"
+                        android:padding="30dp"
+                        android:progress="3" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:src="@drawable/de"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:src="@drawable/fr"
+
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:src="@drawable/en"
+
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:src="@drawable/es"
+
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+
+                    </LinearLayout>
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:lineSpacingExtra="36sp"
-                        android:text="3"
-                        android:textSize="36sp"
-                        android:textStyle="bold|italic"
-                        android:typeface="normal"
-                        app:fontFamily="serif" />
+                        android:id="@+id/txtViewseek"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center_horizontal"
+                        android:textSize="30sp" />
 
                     <Button
-                        android:id="@+id/btn_plus_main_activity"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="+" />
-
-                    <View
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1" />
+                        android:text="start"/>
+
+                    <EditText
+                        android:id="@+id/editText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="time" />
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="AutoCompleteTextView" />
 
                 </LinearLayout>
 
 
-
-                <SeekBar
-                    android:id="@+id/seekBar2"
-                    style="@style/Widget.AppCompat.SeekBar.Discrete"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:max="10"
-                    android:padding="30dp"
-                    android:progress="3" />
-
-                <TextView
-                    android:id="@+id/txtViewseek"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center_horizontal"
-                    android:textSize="30sp" />
-
-                <EditText
-                    android:id="@+id/editText2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="time" />
-
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="AutoCompleteTextView" />
-
             </LinearLayout>
 
-
-
-        </LinearLayout>
-
-    </ScrollView>
+        </ScrollView>
 
         <ListView
             android:visibility="invisible"

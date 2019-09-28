@@ -2,6 +2,8 @@ package com.example.notificationmanager;
 
 import android.app.Notification;
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,6 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -38,22 +41,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnStart;
     private Button btnPause;
     private LinearLayout layoutStart;
-
+    private ArrayList<String> arrayList1;
+    private Constanta constanta;
     private ListView listView;
     private ArrayList<MyDataModel> list;
     private MyArrayAdapter adapter;
+    private TextView tvTest;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+
         notificationManager = NotificationManagerCompat.from(this);
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextMessage = findViewById(R.id.edit_text_message);
     }
 
     private void initView() {
+        tvTest = findViewById(R.id.tv_test_text);
         btnStart = findViewById(R.id.btn_start_main_activity);
         btnPause = findViewById(R.id.btn_pause_main_activity);
         layoutStart = findViewById(R.id.layout_start_main_activit);
@@ -61,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initSeekBarView();
         initAnimationBackground();
     }
+
 
     private void initAnimationBackground() {
         AnimationDrawable animationDrawable = (AnimationDrawable) btnPause
@@ -74,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initSeekBarView() {
         textViewSeekbar = findViewById(R.id.txtViewseek);
-        seekBar = (SeekBar) findViewById(R.id.seekBar2);
+        seekBar = findViewById(R.id.seekBar2);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -98,16 +107,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void sendOnChannel1(View v) {
         String title = editTextTitle.getText().toString();
         String message = editTextMessage.getText().toString();
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.prague, options);
 
         Notification notification = new NotificationCompat.Builder(this, "channel1")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle(title).setProgress(3, 1, true)
+                .setContentTitle(title)
                 .setContentText(message)
+
+                .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(bitmap))
+
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setCategory(NotificationCompat.CATEGORY_SOCIAL)
                 .build();
 
         notificationManager.notify(1, notification);
+    }
+
+    private void RunNotification(View v) {
+        Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
+        Notification notification = new NotificationCompat.Builder(this, "channel1")
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle(getWordsFromDBToNotification())
+                .setContentText("text text")
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText("sub title this"))
+                .build();
+        notificationManager.notify(3, notification);
+
     }
 
     public void sendOnChannel2(View v) {
@@ -126,23 +153,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        // count();
         start();
+        // RunNotification(v);
+    }
+
+    private void count() {
+        int nmb;
+
+        for (nmb = 1; nmb <= 100; nmb++) {
+            tvTest.setText(nmb + "j");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+//проблема в тому що вибиває тут помилку і не хоче запускати цикл
+        }
+        // Toast.makeText(this, "yyyy", Toast.LENGTH_SHORT).show();
 
     }
 
     private void start() {
-        layoutStart.setVisibility(View.VISIBLE);
-        connectToDB();
-        new GetDataTask().execute();
+      layoutStart.setVisibility(View.VISIBLE);
+    //  connectToDB();
+     //  new GetDataTask().execute();
 
 
-        visibilityForListView();
+       // visibilityForListView();
+        unvisibilityForStartbutton();
+
+    }
+
+    private void unvisibilityForStartbutton() {
+        btnStart.setVisibility(View.GONE);
+        btnPause.setVisibility(View.GONE);
+
     }
 
     private void visibilityForListView() {
         listView.setVisibility(View.VISIBLE);
-float weightLayout=1.0f;
-listView.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, weightLayout));
+        float weightLayout = 1.0f;
+        listView.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, weightLayout));
 
     }
 
@@ -172,9 +224,6 @@ listView.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutPar
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            /**
-             * Progress Dialog for User Interaction
-             */
 
             x = list.size();
 
@@ -205,7 +254,6 @@ listView.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutPar
                         JSONArray array = jsonObject.getJSONArray(Keys.KEY_CONTACTS);
 
 
-
                         int lenArray = array.length();
                         if (lenArray > 0) {
                             for (; jIndex < lenArray; jIndex++) {
@@ -218,19 +266,12 @@ listView.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutPar
                                 String name = innerObject.getString(Keys.KEY_NAME);
                                 String country = innerObject.getString(Keys.KEY_COUNTRY);
 
-                                /**
-                                 * Getting Object from Object "phone"
-                                 */
-                                //JSONObject phoneObject = innerObject.getJSONObject(Keys.KEY_PHONE);
-                                //String phone = phoneObject.getString(Keys.KEY_MOBILE);
-
                                 model.setName(name);
                                 model.setCountry(country);
+//                                arrayList1.add(name + " - " + country);
 
-                                /**
-                                 * Adding name and phone concatenation in List...
-                                 */
                                 list.add(model);
+
                             }
                         }
                     }
@@ -255,6 +296,39 @@ listView.setLayoutParams(new LinearLayout.LayoutParams(0, LinearLayout.LayoutPar
                 adapter.notifyDataSetChanged();
             }
         }
+    }
+
+    private String getWordsFromDBToNotification() {
+        int randomNum1 = getRandomNumberInRange(0, 2999);
+        int randomNum2 = getRandomNumberInRange(0, 2999);
+        int randomNum3 = getRandomNumberInRange(0, 2999);
+
+        arrayList1 = new ArrayList<>();
+
+       
+
+       /* arrayList1.add(0,"s2222df");
+        arrayList1.add(1,"sdf");
+        arrayList1.add(2,"sdf333");
+        arrayList1.add(3,"sdf");
+        arrayList1.add(4,"sdf");*/
+
+        String string1 = "dsfsdf";//arrayList1.get(2);
+        String string2 = " dsfsf";//arrayList1.get(3);
+        String string3 = " l";//arrayList1.get(4);
+        String res = string1 + string2 + string3;
+
+        return res;
+    }
+
+    private static int getRandomNumberInRange(int min, int max) {
+
+        if (min >= max) {
+            throw new IllegalArgumentException("max must be greater than min");
+        }
+
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
     }
 
 }

@@ -1,6 +1,6 @@
 package com.example.notificationmanager;
 
-public class DataBaseWords {
+public class ChoseTimeForNotification {
 
 
 

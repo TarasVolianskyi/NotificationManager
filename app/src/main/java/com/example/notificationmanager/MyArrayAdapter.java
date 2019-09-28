@@ -24,6 +24,7 @@ public class MyArrayAdapter extends ArrayAdapter<MyDataModel> {
         modelList = objects;
     }
 
+
     @Override
     public MyDataModel getItem(int position) {
         return modelList.get(position);
@@ -52,7 +53,7 @@ public class MyArrayAdapter extends ArrayAdapter<MyDataModel> {
         public final TextView textViewName;
         public final TextView textViewCountry;
 
-        private ViewHolder(LinearLayout rootView, TextView textViewName, TextView textViewCountry) {
+        public ViewHolder(LinearLayout rootView, TextView textViewName, TextView textViewCountry) {
             this.rootView = rootView;
             this.textViewName = textViewName;
             this.textViewCountry = textViewCountry;
