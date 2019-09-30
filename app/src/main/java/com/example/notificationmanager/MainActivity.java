@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<MyDataModel> list;
     private MyArrayAdapter adapter;
     private TextView tvTest;
+    private LinearLayout mainLayout;
 
 
     @Override
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnStart = findViewById(R.id.btn_start_main_activity);
         btnPause = findViewById(R.id.btn_pause_main_activity);
         layoutStart = findViewById(R.id.layout_start_main_activit);
+        mainLayout = findViewById(R.id.mainLayout);
         btnStart.setOnClickListener(this);
         initSeekBarView();
         initAnimationBackground();
@@ -72,10 +74,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     private void initAnimationBackground() {
-        AnimationDrawable animationDrawable = (AnimationDrawable) btnPause
+        AnimationDrawable animationDrawable = (AnimationDrawable) mainLayout
                 .getBackground();
         animationDrawable.setEnterFadeDuration(1000);
-        animationDrawable.setExitFadeDuration(4000);
+        animationDrawable.setExitFadeDuration(2000);
         animationDrawable.start();
 
 
@@ -175,12 +177,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void start() {
-      layoutStart.setVisibility(View.VISIBLE);
-    //  connectToDB();
-     //  new GetDataTask().execute();
+        layoutStart.setVisibility(View.VISIBLE);
+        //  connectToDB();
+        //  new GetDataTask().execute();
 
 
-       // visibilityForListView();
+        // visibilityForListView();
         unvisibilityForStartbutton();
 
     }

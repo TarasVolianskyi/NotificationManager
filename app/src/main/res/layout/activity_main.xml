@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/mainLayout"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_list"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -24,22 +26,27 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_test_text" />
 
                 <Button
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="sendOnChannel1"
                     android:text="Send on Channel 1" />
 
                 <Button
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="sendOnChannel2"
                     android:text="Send on Channel 2" />
-
+<View
+    android:layout_width="match_parent"
+    android:layout_height="200dp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -53,17 +60,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Start"
+                        android:textSize="50dp"
+                        android:textStyle="bold"
                         android:background="@drawable/shape_drawable"
                         android:textColor="@color/colorPrimary"
-                        android:padding="12dp" />
+                        android:padding="6dp" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="50dp" />
+                    android:layout_height="40dp" />
 
 
                 <Button
+                    android:visibility="gone"
                     android:id="@+id/btn_pause_main_activity"
                     android:layout_width="match_parent"
                     android:layout_height="90dp"
@@ -72,12 +82,14 @@
                     android:background="@drawable/gradient_list" />
 
                 <EditText
+                    android:visibility="gone"
                     android:id="@+id/edit_text_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Title" />
 
                 <EditText
+                    android:visibility="gone"
                     android:id="@+id/edit_text_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -159,6 +171,7 @@
 
                         <ImageView
                             android:layout_width="0dp"
+
                             android:src="@drawable/de"
                             android:layout_height="wrap_content"
                             android:layout_weight="2" />
