@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:id="@+id/mainLayout"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_list"
+    android:background="@drawable/background"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -39,14 +39,16 @@
                     android:text="Send on Channel 1" />
 
                 <Button
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="sendOnChannel2"
-                    android:text="Send on Channel 2" />
-<View
-    android:layout_width="match_parent"
-    android:layout_height="200dp"/>
+                    android:text="Send on Channel 2"
+                    android:visibility="gone" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -57,19 +59,16 @@
 
                     <Button
                         android:id="@+id/btn_start_main_activity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="300dp"
+                        android:layout_height="300dp"
+                        android:background="@drawable/gradient_list"
+                        android:padding="6dp"
+                        android:shadowColor="@color/colorPrimary"
                         android:text="Start"
+                        android:textColor="#D60B0B"
                         android:textSize="50dp"
-                        android:textStyle="bold"
-                        android:background="@drawable/shape_drawable"
-                        android:textColor="@color/colorPrimary"
-                        android:padding="6dp" />
+                        android:textStyle="bold" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp" />
 
 
                 <Button
@@ -94,9 +93,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Message" />
-
-
-
 
 
                 <LinearLayout
@@ -230,11 +226,12 @@
                         android:textSize="30sp" />
 
                     <Button
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="start"/>
+                        android:text="start" />
 
                     <EditText
+                        android:visibility="gone"
                         android:id="@+id/editText2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -242,6 +239,8 @@
                         android:inputType="time" />
 
                     <AutoCompleteTextView
+                        android:visibility="gone"
+
                         android:id="@+id/autoCompleteTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
