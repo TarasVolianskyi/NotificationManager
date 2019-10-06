@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,11 +13,14 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,6 +52,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MyArrayAdapter adapter;
     private TextView tvTest;
     private LinearLayout mainLayout;
+    private VideoView videoView;
+    private FrameLayout frameLayout;
+    private ImageView imageViewStartPlay;
 
 
     @Override
@@ -55,10 +62,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        videoViewStart();
 
         notificationManager = NotificationManagerCompat.from(this);
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextMessage = findViewById(R.id.edit_text_message);
+        imageViewStartPlay = findViewById(R.id.iv_spart_play_activity_main);
+        imageViewStartPlay.setOnClickListener(this);
+    }
+
+    private void videoViewStart() {
+        frameLayout = findViewById(R.id.frame_layout_main_activity);
+        frameLayout.isClickable();
+        frameLayout.setOnClickListener(this);
+
+        videoView = findViewById(R.id.video_view);
+        videoView.setMediaController(null);
+
+        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.video;
+        Uri uri = Uri.parse(videoPath);
+        videoView.setVideoURI(uri);
     }
 
     private void initView() {
@@ -156,8 +179,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         // count();
-        start();
         // RunNotification(v);
+        frameLayout.setVisibility(v.VISIBLE);
+        imageViewStartPlay.setVisibility(v.GONE);
+        videoView.start();
+        sleap(3);
+        start();
+
+    }
+
+    public void sleap(int timeSec) {
+        try {
+            Thread.sleep(timeSec * 1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void count() {
@@ -190,7 +226,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void unvisibilityForStartbutton() {
         btnStart.setVisibility(View.GONE);
         btnPause.setVisibility(View.GONE);
-
     }
 
     private void visibilityForListView() {
