@@ -33,6 +33,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -45,26 +46,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnStart;
     private Button btnPause;
     private LinearLayout layoutStart;
-    private ArrayList<String> arrayList1;
+    private ArrayList <String> arrayList1;
     private Constanta constanta;
     private ListView listView;
-    private ArrayList<MyDataModel> list;
+    private ArrayList <MyDataModel> list;
     private MyArrayAdapter adapter;
     private TextView tvTest;
     private LinearLayout mainLayout;
     private VideoView videoView;
     private FrameLayout frameLayout;
     private ImageView imageViewStartPlay;
-    private Thread t1 = null;
-    private Thread t2 = null;
-
+private  MyTask mt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        initThreads();
     }
 
     private void videoViewStart() {
@@ -98,30 +96,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         videoViewStart();
     }
 
-    private void initThreads() {
-
-        t1 = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                startvidos();
-
-            }
-        });
-
-        t2 = new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-
-                start();
-
-            }
-        });
-        t1.start();
-        t2.start();
-
-    }
 
     private void initAnimationBackground() {
         AnimationDrawable animationDrawable = (AnimationDrawable) btnStart
@@ -205,8 +179,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        t1.start();
-        t2.start();
+        mt = new MyTask();
+        mt.execute();
     }
 
 
@@ -244,8 +218,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void start() {
-           sleap(2);
-           layoutStart.setVisibility(View.VISIBLE);
+        //sleap(2);
+        layoutStart.setVisibility(View.VISIBLE);
         //               connectToDB();
         //      new GetDataTask().execute();
         //              visibilityForListView();
@@ -265,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void connectToDB() {
-        list = new ArrayList<>();
+        list = new ArrayList <>();
         adapter = new MyArrayAdapter(this, list);
         listView = (ListView) findViewById(R.id.list_of_words_main_activity);
         listView.setAdapter(adapter);
@@ -275,7 +249,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    class GetDataTask extends AsyncTask<Void, Void, Void> {
+    class GetDataTask extends AsyncTask <Void, Void, Void> {
 
         ProgressDialog dialog;
         int jIndex;
@@ -363,7 +337,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int randomNum2 = getRandomNumberInRange(0, 2999);
         int randomNum3 = getRandomNumberInRange(0, 2999);
 
-        arrayList1 = new ArrayList<>();
+        arrayList1 = new ArrayList <>();
 
        
 
@@ -389,6 +363,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Random r = new Random();
         return r.nextInt((max - min) + 1) + min;
+    }
+
+    class MyTask extends AsyncTask <Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            startvidos();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(2500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            frameLayout.setVisibility(View.GONE);
+            layoutStart.setVisibility(View.VISIBLE);
+
+
+        }
     }
 
 }
