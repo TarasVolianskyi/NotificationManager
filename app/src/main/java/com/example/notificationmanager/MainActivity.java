@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private VideoView videoView;
     private FrameLayout frameLayout;
     private ImageView imageViewStartPlay;
+    private Thread t1 = null;
+    private Thread t2 = null;
 
 
     @Override
@@ -62,13 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        videoViewStart();
-
-        notificationManager = NotificationManagerCompat.from(this);
-        editTextTitle = findViewById(R.id.edit_text_title);
-        editTextMessage = findViewById(R.id.edit_text_message);
-        imageViewStartPlay = findViewById(R.id.iv_spart_play_activity_main);
-        imageViewStartPlay.setOnClickListener(this);
+        initThreads();
     }
 
     private void videoViewStart() {
@@ -78,23 +74,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         videoView = findViewById(R.id.video_view);
         videoView.setMediaController(null);
-
         String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.video;
         Uri uri = Uri.parse(videoPath);
         videoView.setVideoURI(uri);
+        // videoView.setOnClickListener(this);
     }
 
     private void initView() {
+        notificationManager = NotificationManagerCompat.from(this);
+        editTextTitle = findViewById(R.id.edit_text_title);
+        editTextMessage = findViewById(R.id.edit_text_message);
         tvTest = findViewById(R.id.tv_test_text);
         btnStart = findViewById(R.id.btn_start_main_activity);
         btnPause = findViewById(R.id.btn_pause_main_activity);
         layoutStart = findViewById(R.id.layout_start_main_activit);
         mainLayout = findViewById(R.id.mainLayout);
-        btnStart.setOnClickListener(this);
-        initSeekBarView();
-        initAnimationBackground();
+        // btnStart.setOnClickListener(this);
+        imageViewStartPlay = findViewById(R.id.iv_spart_play_activity_main);
+        imageViewStartPlay.setOnClickListener(this);
+
+        //initSeekBarView();
+        //initAnimationBackground();
+        videoViewStart();
     }
 
+    private void initThreads() {
+
+        t1 = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                startvidos();
+
+            }
+        });
+
+        t2 = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+
+                start();
+
+            }
+        });
+        t1.start();
+        t2.start();
+
+    }
 
     private void initAnimationBackground() {
         AnimationDrawable animationDrawable = (AnimationDrawable) btnStart
@@ -178,13 +205,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        t1.start();
+        t2.start();
+    }
+
+
+    private void startvidos() {
+        videoView.start();
         // count();
         // RunNotification(v);
-        frameLayout.setVisibility(v.VISIBLE);
-        imageViewStartPlay.setVisibility(v.GONE);
-        videoView.start();
-        sleap(3);
-        start();
+        imageViewStartPlay.setVisibility(View.GONE);
+        frameLayout.setVisibility(View.VISIBLE);
 
     }
 
@@ -213,14 +244,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void start() {
-        layoutStart.setVisibility(View.VISIBLE);
-        //  connectToDB();
-        //  new GetDataTask().execute();
-
-
-        // visibilityForListView();
-        unvisibilityForStartbutton();
-
+           sleap(2);
+           layoutStart.setVisibility(View.VISIBLE);
+        //               connectToDB();
+        //      new GetDataTask().execute();
+        //              visibilityForListView();
+        //              unvisibilityForStartbutton();
     }
 
     private void unvisibilityForStartbutton() {
@@ -236,16 +265,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void connectToDB() {
-
-
         list = new ArrayList<>();
-
         adapter = new MyArrayAdapter(this, list);
-
         listView = (ListView) findViewById(R.id.list_of_words_main_activity);
         listView.setAdapter(adapter);
-
-
         Toast toast = Toast.makeText(getApplicationContext(), "Click on FloatingActionButton to Load JSON", Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
