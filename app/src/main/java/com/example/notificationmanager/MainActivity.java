@@ -205,8 +205,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        t1.start();
-        t2.start();
+strttt();
+
+
     }
 
 
@@ -216,7 +217,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // RunNotification(v);
         imageViewStartPlay.setVisibility(View.GONE);
         frameLayout.setVisibility(View.VISIBLE);
-
+        //sleep here
+        sleap(3);
+        layoutStart.setVisibility(View.VISIBLE);
     }
 
     public void sleap(int timeSec) {
@@ -243,9 +246,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    private void strttt(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+              startvidos();
+            }
+        });
+    }
+
     private void start() {
-           sleap(2);
-           layoutStart.setVisibility(View.VISIBLE);
+          // sleap(2);
+           //layoutStart.setVisibility(View.VISIBLE);
         //               connectToDB();
         //      new GetDataTask().execute();
         //              visibilityForListView();
