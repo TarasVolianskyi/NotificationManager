@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView imageViewFlagDE;
     private ImageView imageViewFlagES;
     private List<Integer> listOfPeriodTime;
-    //private List<String> listOfWordsENtoRU;
     private List<String> listOfWordsEStoRU;
     private List<String> listOfWordsDEtoRU;
     private List<String> listOfWordsFRtoRU;
@@ -124,7 +123,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         videoViewStart();
         initSeekBarView();
         initFlagImages();
-        myBaseOfWords.baseOfLocalWordsENtoRU();
     }
 
     private void initPeriodOfTime() {
@@ -227,8 +225,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String localRes = " Amount of words - " + numberOfWords + "\n Period of time - " + periodOfTime + "\n Language - " + language;
         finalListOfWords = new ArrayList<>();
         for (int i = 0; i < numberOfWords; i++) {
-            finalListOfWords.add(myBaseOfWords.listOfWordsENtoRU.get(getRandomNumberInRange(0, myBaseOfWords.listOfWordsENtoRU.size() - 1)));
-            //finalListOfWords.add(listOfWordsENtoRU.get(3));
+            if (language.equals("EN")) {
+                myBaseOfWords.baseOfLocalWordsENtoRU();
+                finalListOfWords.add(myBaseOfWords.listOfWordsENtoRU.get(getRandomNumberInRange(0, myBaseOfWords.listOfWordsENtoRU.size() - 1)));
+            } else if (language.equals("DE")) {        myBaseOfWords.baseOfLocalWordsDEtoRU();
+
+                finalListOfWords.add(myBaseOfWords.listOfWordsDEtoRU.get(getRandomNumberInRange(0, myBaseOfWords.listOfWordsDEtoRU.size() - 1)));
+            } else if (language.equals("FR")) {        myBaseOfWords.baseOfLocalWordsFRtoRU();
+
+                finalListOfWords.add(myBaseOfWords.listOfWordsFRtoRU.get(getRandomNumberInRange(0, myBaseOfWords.listOfWordsFRtoRU.size() - 1)));
+            } else if (language.equals("ES")) {        myBaseOfWords.baseOfLocalWordsEStoRU();
+
+                finalListOfWords.add(myBaseOfWords.listOfWordsEStoRU.get(getRandomNumberInRange(0, myBaseOfWords.listOfWordsEStoRU.size() - 1)));
+            }
+
         }
         String result = "";
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

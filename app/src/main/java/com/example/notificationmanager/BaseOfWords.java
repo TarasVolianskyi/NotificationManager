@@ -7,10 +7,9 @@ public class BaseOfWords {
 
 
     public List<String> listOfWordsENtoRU = new ArrayList<>();
-
-    private List<String> listOfWordsEStoRU= new ArrayList<>();
-    private List<String> listOfWordsDEtoRU= new ArrayList<>();
-    private List<String> listOfWordsFRtoRU= new ArrayList<>();
+    public List<String> listOfWordsEStoRU = new ArrayList<>();
+    public List<String> listOfWordsDEtoRU = new ArrayList<>();
+    public List<String> listOfWordsFRtoRU = new ArrayList<>();
 
     public void baseOfLocalWordsENtoRU() {
         listOfWordsENtoRU.add("abandon - отказаться от");
