@@ -9,6 +9,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -228,13 +229,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (language.equals("EN")) {
                 myBaseOfWords.baseOfLocalWordsENtoRU();
                 finalListOfWords.add(myBaseOfWords.listOfWordsENtoRU.get(getRandomNumberInRange(0, myBaseOfWords.listOfWordsENtoRU.size() - 1)));
-            } else if (language.equals("DE")) {        myBaseOfWords.baseOfLocalWordsDEtoRU();
+            } else if (language.equals("DE")) {
+                myBaseOfWords.baseOfLocalWordsDEtoRU();
 
                 finalListOfWords.add(myBaseOfWords.listOfWordsDEtoRU.get(getRandomNumberInRange(0, myBaseOfWords.listOfWordsDEtoRU.size() - 1)));
-            } else if (language.equals("FR")) {        myBaseOfWords.baseOfLocalWordsFRtoRU();
+            } else if (language.equals("FR")) {
+                myBaseOfWords.baseOfLocalWordsFRtoRU();
 
                 finalListOfWords.add(myBaseOfWords.listOfWordsFRtoRU.get(getRandomNumberInRange(0, myBaseOfWords.listOfWordsFRtoRU.size() - 1)));
-            } else if (language.equals("ES")) {        myBaseOfWords.baseOfLocalWordsEStoRU();
+            } else if (language.equals("ES")) {
+                myBaseOfWords.baseOfLocalWordsEStoRU();
 
                 finalListOfWords.add(myBaseOfWords.listOfWordsEStoRU.get(getRandomNumberInRange(0, myBaseOfWords.listOfWordsEStoRU.size() - 1)));
             }
@@ -270,6 +274,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_second_start:
                 runNotification();
+                startTimer();
                 break;
             case R.id.btn_minus_main_activity:
                 minusNumberOfWords();
@@ -481,6 +486,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvNunberOfWords.setText(numberOfWords + textWord);
 
 
+    }
+
+    private void startTimer() {
+
+        new CountDownTimer(15000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                textViewSeekbar.setText("seconds remaining: " + millisUntilFinished / 1000);
+            }
+            public void onFinish() {
+                runNotification();
+            }
+        }.start();
     }
 
 
