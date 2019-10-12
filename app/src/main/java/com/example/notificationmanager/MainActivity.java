@@ -71,6 +71,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView imageViewFlagDE;
     private ImageView imageViewFlagES;
     private List<Integer> listOfPeriodTime;
+    //private List<String> listOfWordsENtoRU;
+    private List<String> listOfWordsEStoRU;
+    private List<String> listOfWordsDEtoRU;
+    private List<String> listOfWordsFRtoRU;
+    private List<String> finalListOfWords;
+    private BaseOfWords myBaseOfWords;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,12 +118,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvNunberOfWords = findViewById(R.id.tv_num_of_words_main_activity);
         btnMinusNum.setOnClickListener(this);
         btnPlusNum.setOnClickListener(this);
+        myBaseOfWords = new BaseOfWords();
         //initSeekBarView();
         //initAnimationBackground();
         videoViewStart();
         initSeekBarView();
         initFlagImages();
-
+        myBaseOfWords.baseOfLocalWordsENtoRU();
     }
 
     private void initPeriodOfTime() {
@@ -166,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textViewSeekbar.setText("You will get a message every " + setPeriodOfTime(progress)/60 + " minutes");
+                textViewSeekbar.setText("You will get a message every " + setPeriodOfTime(progress) / 60 + " minutes");
                 periodOfTime = progress;
                 Toast.makeText(MainActivity.this, "" + progress, Toast.LENGTH_SHORT).show();
             }
@@ -205,13 +213,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
         Notification notification = new NotificationCompat.Builder(this, "channel1")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle(getWordsFromDBToNotification())
-                .setContentText("text text")
+                .setContentTitle("New words for YOU")
+                .setContentText("text text" + createTextForFinalNotification())
                 .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText("sub title this"))
+                        .bigText(createTextForFinalNotification()))
                 .build();
         notificationManager.notify(3, notification);
 
+    }
+
+
+    private String createTextForFinalNotification() {
+        String localRes = " Amount of words - " + numberOfWords + "\n Period of time - " + periodOfTime + "\n Language - " + language;
+        finalListOfWords = new ArrayList<>();
+        for (int i = 0; i < numberOfWords; i++) {
+            finalListOfWords.add(myBaseOfWords.listOfWordsENtoRU.get(getRandomNumberInRange(0, myBaseOfWords.listOfWordsENtoRU.size() - 1)));
+            //finalListOfWords.add(listOfWordsENtoRU.get(3));
+        }
+        String result = "";
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            result = String.join("\n", finalListOfWords);
+        }
+
+        return result;
     }
 
     public void sendOnChannel2(View v) {
@@ -448,5 +472,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
 
 }
