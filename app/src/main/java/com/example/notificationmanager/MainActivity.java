@@ -21,13 +21,16 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -55,6 +58,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView imageViewStartPlay;
     private MyTask mt;
     private Button btnSecondStart;
+    private Button btnPlusNum;
+    private Button btnMinusNum;
+    private int numberOfWords = 3;
+    private TextView tvNunberOfWords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +87,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvTest = findViewById(R.id.tv_test_text);
         btnStart = findViewById(R.id.btn_start_main_activity);
         btnPause = findViewById(R.id.btn_pause_main_activity);
-        btnSecondStart=findViewById(R.id.btn_second_start);
+        btnSecondStart = findViewById(R.id.btn_second_start);
+        btnMinusNum = findViewById(R.id.btn_minus_main_activity);
+        btnPlusNum = findViewById(R.id.btn_plus_main_activity);
         layoutStart = findViewById(R.id.layout_start_main_activit);
         mainLayout = findViewById(R.id.mainLayout);
         frameLayout = findViewById(R.id.frame_layout_main_activity);
@@ -90,6 +99,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imageViewStartPlay = findViewById(R.id.iv_spart_play_activity_main);
         imageViewStartPlay.setOnClickListener(this);
         btnSecondStart.setOnClickListener(this);
+        tvNunberOfWords = findViewById(R.id.tv_num_of_words_main_activity);
+        btnMinusNum.setOnClickListener(this);
+        btnPlusNum.setOnClickListener(this);
         //initSeekBarView();
         //initAnimationBackground();
         videoViewStart();
@@ -129,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void sendOnChannel1() {
+    public void sendOnChannel1(View v) {
         String title = editTextTitle.getText().toString();
         String message = editTextMessage.getText().toString();
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -159,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public void sendOnChannel2() {
+    public void sendOnChannel2(View v) {
         String title = editTextTitle.getText().toString();
         String message = editTextMessage.getText().toString();
 
@@ -180,44 +192,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mt.execute();
                 break;
             case R.id.btn_second_start:
-               sendOnChannel1();
+                runNotification();
                 break;
+            case R.id.btn_minus_main_activity:
+                minusNumberOfWords();
+                break;
+            case R.id.btn_plus_main_activity:
+                plusNumberOfWords();
+                break;
+
+
+
         }
     }
 
-
     private void startvidos() {
         videoView.start();
-        // count();
         // RunNotification(v);
         imageViewStartPlay.setVisibility(View.GONE);
         frameLayout.setVisibility(View.VISIBLE);
     }
 
-    public void sleap(int timeSec) {
-        try {
-            Thread.sleep(timeSec * 1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void count() {
-        int nmb;
-        for (nmb = 1; nmb <= 100; nmb++) {
-            tvTest.setText(nmb + "j");
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            //проблема в тому що вибиває тут помилку і не хоче запускати цикл
-        }
-        // Toast.makeText(this, "yyyy", Toast.LENGTH_SHORT).show();
-    }
 
     private void start() {
-        //sleap(2);
         layoutStart.setVisibility(View.VISIBLE);
         //               connectToDB();
         //      new GetDataTask().execute();
@@ -250,6 +247,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ProgressDialog dialog;
         int jIndex;
         int x;
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -360,6 +358,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             frameLayout.setVisibility(View.GONE);
             layoutStart.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void plusNumberOfWords() {
+        if (numberOfWords == 10) {
+            Toast.makeText(this, "The maximum number of words per one notification is 10 words", Toast.LENGTH_SHORT).show();
+        } else if (numberOfWords < 10) {
+            numberOfWords = numberOfWords + 1;
+            setTextForNumberOfWords(numberOfWords);
+        }
+    }
+
+    private void minusNumberOfWords() {
+        if (numberOfWords == 1) {
+            Toast.makeText(this, "The minimum number of words per one notification is 1 word", Toast.LENGTH_SHORT).show();
+        } else if (numberOfWords > 1) {
+            numberOfWords = numberOfWords - 1;
+            setTextForNumberOfWords(numberOfWords);
+        }
+    }
+
+    private void setTextForNumberOfWords(int number) {
+        String textWord = "";
+        if (number == 1) {
+            textWord = " word";
+        } else if (number > 1) {
+            textWord = " words";
+        }
+        tvNunberOfWords.setText(numberOfWords + textWord);
+
+
     }
 
 }

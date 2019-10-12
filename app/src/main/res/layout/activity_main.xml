@@ -8,15 +8,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
     <!-- android:background="@drawable/background"-->
-
     <!-- this is a comment -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
-
 
         <ScrollView
             android:layout_width="0dp"
@@ -67,8 +65,6 @@
                     android:orientation="vertical"
                     android:layout_gravity="center"
                     android:gravity="center">
-
-
 
                     <FrameLayout
                         android:visibility="gone"
@@ -157,8 +153,9 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:lineSpacingExtra="36sp"
-                            android:text="3"
-                            android:textSize="36sp"
+                            android:text="3 words"
+                            android:id="@+id/tv_num_of_words_main_activity"
+                            android:textSize="16sp"
                             android:textStyle="bold|italic"
                             android:typeface="normal"
                             app:fontFamily="serif" />
@@ -187,6 +184,15 @@
                         android:padding="30dp"
                         android:progress="3" />
 
+                    <TextView
+                        android:id="@+id/txtViewseek"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center_horizontal"
+                        android:textSize="30sp" />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
@@ -199,7 +205,6 @@
 
                         <ImageView
                             android:layout_width="0dp"
-
                             android:src="@drawable/de"
                             android:layout_height="wrap_content"
                             android:layout_weight="2" />
@@ -212,7 +217,6 @@
                         <ImageView
                             android:layout_width="0dp"
                             android:src="@drawable/fr"
-
                             android:layout_height="wrap_content"
                             android:layout_weight="2" />
 
@@ -236,7 +240,6 @@
                         <ImageView
                             android:layout_width="0dp"
                             android:src="@drawable/es"
-
                             android:layout_height="wrap_content"
                             android:layout_weight="2" />
 
@@ -248,14 +251,7 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/txtViewseek"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:layout_centerHorizontal="true"
-                        android:gravity="center_horizontal"
-                        android:textSize="30sp" />
+
 
                     <Button
                         android:id="@+id/btn_second_start"
@@ -273,17 +269,12 @@
 
                     <AutoCompleteTextView
                         android:visibility="gone"
-
                         android:id="@+id/autoCompleteTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="AutoCompleteTextView" />
-
                 </LinearLayout>
-
-
             </LinearLayout>
-
         </ScrollView>
 
         <ListView
