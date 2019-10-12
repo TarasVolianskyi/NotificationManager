@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -32,6 +33,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -61,7 +63,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnPlusNum;
     private Button btnMinusNum;
     private int numberOfWords = 3;
+    private String language = "EN";
+    private int periodOfTime = 3;
     private TextView tvNunberOfWords;
+    private ImageView imageViewFlagFR;
+    private ImageView imageViewFlagEN;
+    private ImageView imageViewFlagDE;
+    private ImageView imageViewFlagES;
+    private List<Integer> listOfPeriodTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,8 +114,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //initSeekBarView();
         //initAnimationBackground();
         videoViewStart();
+        initSeekBarView();
+        initFlagImages();
+
     }
 
+    private void initPeriodOfTime() {
+        Constanta myConstanta = new Constanta();
+        listOfPeriodTime = new ArrayList<>();
+        listOfPeriodTime.add(myConstanta.getMin15());
+        listOfPeriodTime.add(myConstanta.getMin20());
+        listOfPeriodTime.add(myConstanta.getMin30());
+        listOfPeriodTime.add(myConstanta.getMin60());
+        listOfPeriodTime.add(myConstanta.getMin90());
+        listOfPeriodTime.add(myConstanta.getMin120());
+
+    }
+
+    private void initFlagImages() {
+        imageViewFlagDE = findViewById(R.id.iv_de_language_main_activity);
+        imageViewFlagEN = findViewById(R.id.iv_en_language_main_activity);
+        imageViewFlagES = findViewById(R.id.iv_es_language_main_activity);
+        imageViewFlagFR = findViewById(R.id.iv_fr_language_main_activity);
+        imageViewFlagDE.setOnClickListener(this);
+        imageViewFlagEN.setOnClickListener(this);
+        imageViewFlagES.setOnClickListener(this);
+        imageViewFlagFR.setOnClickListener(this);
+    }
+
+    private int setPeriodOfTime(int positionOsSeekBar) {
+        initPeriodOfTime();
+        return listOfPeriodTime.get(positionOsSeekBar);
+    }
 
     private void initAnimationBackground() {
         AnimationDrawable animationDrawable = (AnimationDrawable) btnStart
@@ -120,12 +159,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initSeekBarView() {
         textViewSeekbar = findViewById(R.id.txtViewseek);
+        textViewSeekbar.setText("You will get a message every 30 minutes");
         seekBar = findViewById(R.id.seekBar2);
+        seekBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.neonBlue), PorterDuff.Mode.SRC_ATOP);
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-                textViewSeekbar.setText(String.valueOf(progress));
+                textViewSeekbar.setText("You will get a message every " + setPeriodOfTime(progress)/60 + " minutes");
+                periodOfTime = progress;
+                Toast.makeText(MainActivity.this, "" + progress, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -201,6 +244,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 plusNumberOfWords();
                 break;
 
+            case R.id.iv_de_language_main_activity:
+                changeLanguage("DE");
+                break;
+            case R.id.iv_fr_language_main_activity:
+                changeLanguage("FR");
+                break;
+            case R.id.iv_en_language_main_activity:
+                changeLanguage("EN");
+                break;
+            case R.id.iv_es_language_main_activity:
+                changeLanguage("ES");
+                break;
 
 
         }
@@ -212,7 +267,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imageViewStartPlay.setVisibility(View.GONE);
         frameLayout.setVisibility(View.VISIBLE);
     }
-
 
     private void start() {
         layoutStart.setVisibility(View.VISIBLE);
@@ -376,6 +430,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             numberOfWords = numberOfWords - 1;
             setTextForNumberOfWords(numberOfWords);
         }
+    }
+
+    private void changeLanguage(String langLocal) {
+        language = langLocal;
+        Toast.makeText(this, "YOU CHOOSED LANGUAGE - " + langLocal, Toast.LENGTH_SHORT).show();
     }
 
     private void setTextForNumberOfWords(int number) {

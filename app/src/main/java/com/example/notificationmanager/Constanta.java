@@ -1,7 +1,14 @@
 package com.example.notificationmanager;
 
 public class Constanta {
-    private int min15 = 1;
+
+
+    /////////
+
+
+
+
+    private int min15 = 900;
     private int min20 = 1200;
     private int min30 = 1800;
     private int min60 = 3600;
