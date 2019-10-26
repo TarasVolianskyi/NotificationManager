@@ -13,6 +13,8 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -28,6 +30,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -72,11 +78,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView imageViewFlagDE;
     private ImageView imageViewFlagES;
     private List<Integer> listOfPeriodTime;
-    private List<String> listOfWordsEStoRU;
-    private List<String> listOfWordsDEtoRU;
-    private List<String> listOfWordsFRtoRU;
     private List<String> finalListOfWords;
     private BaseOfWords myBaseOfWords;
+    private Animation animation;
 
 
     @Override
@@ -124,6 +128,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         videoViewStart();
         initSeekBarView();
         initFlagImages();
+        adMobView();
+
+    }
+
+    private void animation() {
+        animation = AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.sample_animation);
+
+
+    }
+
+    private void adMobView() {
+        MobileAds.initialize(this, "ca-app-pub-3623739700338204~4196875821");
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     private void initPeriodOfTime() {
@@ -269,8 +289,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_spart_play_activity_main:
-                mt = new MyTask();
-                mt.execute();
+              imageViewStartPlay.startAnimation(animation);
+          //   mt = new MyTask();
+            //    mt.execute();
+
                 break;
             case R.id.btn_second_start:
                 runNotification();
@@ -291,6 +313,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.iv_en_language_main_activity:
                 changeLanguage("EN");
+                animation();
                 break;
             case R.id.iv_es_language_main_activity:
                 changeLanguage("ES");
@@ -489,11 +512,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void startTimer() {
-
+        //todo start from here next time
         new CountDownTimer(15000, 1000) {
             public void onTick(long millisUntilFinished) {
                 textViewSeekbar.setText("seconds remaining: " + millisUntilFinished / 1000);
             }
+
             public void onFinish() {
                 runNotification();
             }

@@ -13,7 +13,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="600dp"
         android:orientation="horizontal">
 
         <ScrollView
@@ -288,5 +288,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/list_of_words_main_activity" />
     </LinearLayout>
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3623739700338204/3952664364"></com.google.android.gms.ads.AdView>
 
 </LinearLayout>
