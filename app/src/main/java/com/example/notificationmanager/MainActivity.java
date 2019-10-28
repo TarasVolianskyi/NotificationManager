@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int numberOfWords = 3;
     private String language = "EN";
     private int periodOfTime = 3;
+    private int periodOfTimeInSeconds = 900000;
     private TextView tvNunberOfWords;
     private ImageView imageViewFlagFR;
     private ImageView imageViewFlagEN;
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private List<String> finalListOfWords;
     private BaseOfWords myBaseOfWords;
     private Animation animation;
+    private CountDownTimer cTimer = null;
 
 
     @Override
@@ -189,12 +191,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textViewSeekbar.setText("You will get a message every 30 minutes");
         seekBar = findViewById(R.id.seekBar2);
         seekBar.getProgressDrawable().setColorFilter(getResources().getColor(R.color.neonBlue), PorterDuff.Mode.SRC_ATOP);
-
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 textViewSeekbar.setText("You will get a message every " + setPeriodOfTime(progress) / 60 + " minutes");
                 periodOfTime = progress;
+                periodOfTimeInSeconds = setPeriodOfTime(progress) * 10;
+                //  periodOfTimeInSeconds=setPeriodOfTime(progress) ;
                 Toast.makeText(MainActivity.this, "" + progress, Toast.LENGTH_SHORT).show();
             }
 
@@ -238,7 +241,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .bigText(createTextForFinalNotification()))
                 .build();
         notificationManager.notify(3, notification);
-
     }
 
 
@@ -262,13 +264,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 finalListOfWords.add(myBaseOfWords.listOfWordsEStoRU.get(getRandomNumberInRange(0, myBaseOfWords.listOfWordsEStoRU.size() - 1)));
             }
-
         }
         String result = "";
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             result = String.join("\n", finalListOfWords);
         }
-
         return result;
     }
 
@@ -289,22 +289,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_spart_play_activity_main:
-              imageViewStartPlay.startAnimation(animation);
-          //   mt = new MyTask();
-            //    mt.execute();
-
+//                imageViewStartPlay.startAnimation(animation);
+                mt = new MyTask();
+                mt.execute();
                 break;
             case R.id.btn_second_start:
                 runNotification();
-                startTimer();
+             //   startTimer();
+                doWhileMethodForStart();
                 break;
             case R.id.btn_minus_main_activity:
                 minusNumberOfWords();
                 break;
             case R.id.btn_plus_main_activity:
-                plusNumberOfWords();
+                // plusNumberOfWords();
+                finishTimer();
                 break;
-
             case R.id.iv_de_language_main_activity:
                 changeLanguage("DE");
                 break;
@@ -318,8 +318,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.iv_es_language_main_activity:
                 changeLanguage("ES");
                 break;
-
-
         }
     }
 
@@ -428,11 +426,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int randomNum3 = getRandomNumberInRange(0, 2999);
         arrayList1 = new ArrayList<>();
 
-       /* arrayList1.add(0,"s2222df");
-        arrayList1.add(1,"sdf");
-        arrayList1.add(2,"sdf333");
-        arrayList1.add(3,"sdf");
-        arrayList1.add(4,"sdf");*/
 
         String string1 = "dsfsdf";//arrayList1.get(2);
         String string2 = " dsfsf";//arrayList1.get(3);
@@ -511,18 +504,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void startTimer() {
-        //todo start from here next time
-        new CountDownTimer(15000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                textViewSeekbar.setText("seconds remaining: " + millisUntilFinished / 1000);
-            }
+    private void doWhileMethodForStart(){
+while (true) {
 
-            public void onFinish() {
-                runNotification();
-            }
-        }.start();
+    startTimer();
+}
     }
 
+
+    private void startTimer() {
+         cTimer = new CountDownTimer(periodOfTimeInSeconds, 1000) {
+                public void onTick(long millisUntilFinished) {
+                    textViewSeekbar.setText("seconds remaining: " + millisUntilFinished / 1000);
+                }
+
+                public void onFinish() {
+                    runNotification();
+                }
+            }.start();
+    }
+
+    private void finishTimer() {
+        cTimer.cancel();
+        Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
+    }
 
 }
