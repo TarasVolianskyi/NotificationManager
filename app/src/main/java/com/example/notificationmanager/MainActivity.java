@@ -523,8 +523,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         for (int i = 0; i < 100; i++) {
             try {
                 Thread.sleep(periodOfTimeInSeconds);
-                startTimerCountDown();
-                finishTimer();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
