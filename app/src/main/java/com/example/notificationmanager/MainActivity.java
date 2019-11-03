@@ -72,7 +72,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int numberOfWords = 3;
     private String language = "EN";
     private int periodOfTime = 3;
-    private int periodOfTimeInSeconds = 900000;
+    private int periodOfTimeInSeconds = 1000;
+
+    //  private int periodOfTimeInSeconds = 900000;
     private TextView tvNunberOfWords;
     private ImageView imageViewFlagFR;
     private ImageView imageViewFlagEN;
@@ -211,7 +213,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-
     }
 
     public void sendOnChannel1(View v) {
@@ -295,11 +296,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.btn_second_start:
                 runNotification();
-             //   startTimer();
-                doWhileMethodForStart();
+                //  startTimerCountDown();
+       doWhileMethodForStart();
                 break;
             case R.id.btn_minus_main_activity:
                 minusNumberOfWords();
+                testDoWhile();
                 break;
             case R.id.btn_plus_main_activity:
                 // plusNumberOfWords();
@@ -328,13 +330,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         frameLayout.setVisibility(View.VISIBLE);
     }
 
-    private void start() {
-        layoutStart.setVisibility(View.VISIBLE);
-        //               connectToDB();
-        //      new GetDataTask().execute();
-        //              visibilityForListView();
-        //              unvisibilityForStartbutton();
+    private void testDoWhile() {
+        for (int i = 0; i <10; i++) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+
+                e.printStackTrace();
+            }
+
+            Log.d("loogTest", i + "");
+            runNotification();
+        }
+
+
     }
+
+
 
     private void unvisibilityForStartbutton() {
         btnStart.setVisibility(View.GONE);
@@ -469,6 +481,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
     private void plusNumberOfWords() {
         if (numberOfWords == 10) {
             Toast.makeText(this, "The maximum number of words per one notification is 10 words", Toast.LENGTH_SHORT).show();
@@ -504,29 +517,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void doWhileMethodForStart(){
-while (true) {
+    private void doWhileMethodForStart() {
+        startTimerCountDown();
 
-    startTimer();
-}
+        for (int i = 0; i < 100; i++) {
+            try {
+                Thread.sleep(periodOfTimeInSeconds);
+                startTimerCountDown();
+                finishTimer();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+
     }
 
 
-    private void startTimer() {
-         cTimer = new CountDownTimer(periodOfTimeInSeconds, 1000) {
-                public void onTick(long millisUntilFinished) {
-                    textViewSeekbar.setText("seconds remaining: " + millisUntilFinished / 1000);
-                }
+    private void startTimerCountDown() {
+        cTimer = new CountDownTimer(15000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                textViewSeekbar.setText("seconds remaining: " + millisUntilFinished / 1000);
+                 //   Toast.makeText(MainActivity.this, "seconds remaining: " + millisUntilFinished / 1000, Toast.LENGTH_SHORT).show();
 
-                public void onFinish() {
-                    runNotification();
-                }
-            }.start();
+            }
+
+            public void onFinish() {
+                runNotification();
+            }
+        }.start();
     }
 
     private void finishTimer() {
         cTimer.cancel();
-        Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
     }
 
 }
