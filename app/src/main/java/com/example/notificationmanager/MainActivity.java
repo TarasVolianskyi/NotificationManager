@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private BaseOfWords myBaseOfWords;
     private Animation animation;
     private CountDownTimer cTimer = null;
+    private  Thread t;
 
 
     @Override
@@ -295,9 +296,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mt.execute();
                 break;
             case R.id.btn_second_start:
-                runNotification();
+             //   runNotification();
                 //  startTimerCountDown();
-       doWhileMethodForStart();
+                doWhileMethodForStart();
                 break;
             case R.id.btn_minus_main_activity:
                 minusNumberOfWords();
@@ -331,7 +332,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void testDoWhile() {
-        for (int i = 0; i <10; i++) {
+        for (int i = 0; i < 10; i++) {
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -345,7 +346,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
-
 
 
     private void unvisibilityForStartbutton() {
@@ -367,6 +367,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toast toast = Toast.makeText(getApplicationContext(), "Click on FloatingActionButton to Load JSON", Toast.LENGTH_LONG);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
+    }
+
+    public int getPeriodOfTimeInSeconds() {
+        return periodOfTimeInSeconds;
     }
 
     class GetDataTask extends AsyncTask<Void, Void, Void> {
@@ -482,7 +486,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
     private void plusNumberOfWords() {
         if (numberOfWords == 10) {
             Toast.makeText(this, "The maximum number of words per one notification is 10 words", Toast.LENGTH_SHORT).show();
@@ -519,17 +522,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void doWhileMethodForStart() {
-        startTimerCountDown();
+      startTimerCountDown();
 
-        for (int i = 0; i < 100; i++) {
-            try {
-                Thread.sleep(periodOfTimeInSeconds);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+      ThreadRun threadRun=new ThreadRun();
+      threadRun.thread.start();
 
+    }
 
+    private void show2Toast() {
+        Toast.makeText(this, "44334", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -537,7 +538,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cTimer = new CountDownTimer(15000, 1000) {
             public void onTick(long millisUntilFinished) {
                 textViewSeekbar.setText("seconds remaining: " + millisUntilFinished / 1000);
-                 //   Toast.makeText(MainActivity.this, "seconds remaining: " + millisUntilFinished / 1000, Toast.LENGTH_SHORT).show();
+                //   Toast.makeText(MainActivity.this, "seconds remaining: " + millisUntilFinished / 1000, Toast.LENGTH_SHORT).show();
 
             }
 
