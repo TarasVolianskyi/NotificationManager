@@ -14,7 +14,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText editTextTitle;
     private EditText editTextMessage;
     private SeekBar seekBar;
-    private TextView textViewSeekbar;
+    public TextView textViewSeekbar;
     private Button btnStart;
     private Button btnPause;
     private LinearLayout layoutStart;
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int numberOfWords = 3;
     private String language = "EN";
     private int periodOfTime = 3;
-    private int periodOfTimeInSeconds = 1000;
+    public int periodOfTimeInSeconds = 1000;
 
     //  private int periodOfTimeInSeconds = 900000;
     private TextView tvNunberOfWords;
@@ -85,7 +85,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private BaseOfWords myBaseOfWords;
     private Animation animation;
     private CountDownTimer cTimer = null;
-    private  Thread t;
+    private Thread t;
+    private ThreadRun threadRun;
 
 
     @Override
@@ -138,14 +139,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void animation() {
-        animation = AnimationUtils.loadAnimation(getApplicationContext(),
-                R.anim.sample_animation);
-
+         animation = new TranslateAnimation(0, 0, 0, 550);
+        animation.setDuration(1000);
+        animation.setFillAfter(true);
+        imageViewStartPlay.startAnimation(animation);
 
     }
 
     private void adMobView() {
-        MobileAds.initialize(this, "ca-app-pub-3623739700338204~4196875821");
+        MobileAds.initialize(this, "ca-app-pub-3623739700338204~6535393075");
         AdView mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
@@ -180,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initAnimationBackground() {
-        AnimationDrawable animationDrawable = (AnimationDrawable) btnStart
+        AnimationDrawable animationDrawable = (AnimationDrawable) layoutStart
                 .getBackground();
         animationDrawable.setEnterFadeDuration(1000);
         animationDrawable.setExitFadeDuration(2000);
@@ -233,8 +235,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         notificationManager.notify(1, notification);
     }
 
-    private void runNotification() {
-        Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
+    public void runNotification() {
+        // Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
         Notification notification = new NotificationCompat.Builder(this, "channel1")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("New words for YOU")
@@ -294,11 +296,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                imageViewStartPlay.startAnimation(animation);
                 mt = new MyTask();
                 mt.execute();
+                initAnimationBackground();
+              //  animation();
+
                 break;
             case R.id.btn_second_start:
-             //   runNotification();
+                //   runNotification();
                 //  startTimerCountDown();
-                doWhileMethodForStart();
+           doWhileMethodForStart();
                 break;
             case R.id.btn_minus_main_activity:
                 minusNumberOfWords();
@@ -316,7 +321,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.iv_en_language_main_activity:
                 changeLanguage("EN");
-                animation();
                 break;
             case R.id.iv_es_language_main_activity:
                 changeLanguage("ES");
@@ -336,7 +340,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
-
                 e.printStackTrace();
             }
 
@@ -522,14 +525,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void doWhileMethodForStart() {
-      startTimerCountDown();
-
-      ThreadRun threadRun=new ThreadRun();
-      threadRun.thread.start();
-
+        // startTimerCountDown();
+        runNotification();
+        threadRun = new ThreadRun(10);
+        new Thread(threadRun).start();
     }
 
-    private void show2Toast() {
+    public void show2Toast() {
         Toast.makeText(this, "44334", Toast.LENGTH_SHORT).show();
     }
 
