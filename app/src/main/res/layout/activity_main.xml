@@ -19,7 +19,7 @@
         <ScrollView
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="match_parent">
+            android:layout_height="700dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -50,9 +50,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="200dp" />
 
+
                 <LinearLayout
                     android:id="@+id/ll_spart_play_activity_main"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
@@ -91,7 +92,7 @@
                     </LinearLayout>
 
                     <Button
-                        android:visibility="gone"
+                        android:visibility="invisible"
                         android:id="@+id/btn_start_main_activity"
                         android:layout_width="300dp"
                         android:layout_height="300dp"
@@ -333,6 +334,8 @@
 
 
             </LinearLayout>
+
+
         </ScrollView>
 
         <ListView
