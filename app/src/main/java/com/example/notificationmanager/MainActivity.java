@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CountDownTimer cTimer = null;
     private Thread t;
     private ThreadRun threadRun;
+    private LinearLayout linearLayoutLL;
 
 
     @Override
@@ -129,6 +130,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnMinusNum.setOnClickListener(this);
         btnPlusNum.setOnClickListener(this);
         myBaseOfWords = new BaseOfWords();
+        linearLayoutLL=findViewById(R.id.ll_spart_play_activity_main);
+        linearLayoutLL.setOnClickListener(this);
         //initSeekBarView();
         //initAnimationBackground();
         videoViewStart();
@@ -294,10 +297,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.iv_spart_play_activity_main:
 //                imageViewStartPlay.startAnimation(animation);
-                mt = new MyTask();
-                mt.execute();
+           //     mt = new MyTask();
+             //   mt.execute();
                 initAnimationBackground();
-              //  animation();
+                animation();
 
                 break;
             case R.id.btn_second_start:
