@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          animation = new TranslateAnimation(0, 0, 0, 550);
         animation.setDuration(1000);
         animation.setFillAfter(true);
-     //   imageViewStartPlay.startAnimation(animation);
+        imageViewStartPlay.startAnimation(animation);
 
         videoView.startAnimation(animation);
         frameLayout.startAnimation(animation);
