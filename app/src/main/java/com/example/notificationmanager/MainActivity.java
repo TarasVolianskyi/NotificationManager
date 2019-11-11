@@ -147,6 +147,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         animation.setFillAfter(true);
         imageViewStartPlay.startAnimation(animation);
 
+        frameLayout.startAnimation(animation);
+        videoView.startAnimation(animation);
+
     }
 
     private void adMobView() {
@@ -297,8 +300,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.iv_spart_play_activity_main:
 //                imageViewStartPlay.startAnimation(animation);
-           //     mt = new MyTask();
-             //   mt.execute();
+              mt = new MyTask();
+              mt.execute();
                 initAnimationBackground();
                 animation();
 
