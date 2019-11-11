@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void animation() {
-         animation = new TranslateAnimation(0, 0, 0, 550);
+         animation = new TranslateAnimation(0, 0, 0, 950);
         animation.setDuration(1000);
         animation.setFillAfter(true);
         imageViewStartPlay.startAnimation(animation);
