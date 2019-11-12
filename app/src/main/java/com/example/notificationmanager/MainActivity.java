@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private VideoView videoView;
     private FrameLayout frameLayout;
     private ImageView imageViewStartPlay;
+    private ImageView imageViewStartPlay2;
     private MyTask mt;
     private Button btnSecondStart;
     private Button btnPlusNum;
@@ -127,7 +128,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // btnStart.setOnClickListener(this);
 
         imageViewStartPlay = findViewById(R.id.iv_spart_play_activity_main);
+        imageViewStartPlay2 = findViewById(R.id.iv_spart_play2_activity_main);
         imageViewStartPlay.setOnClickListener(this);
+        imageViewStartPlay2.setOnClickListener(this);
         tvNunberOfWords = findViewById(R.id.tv_num_of_words_main_activity);
         btnMinusNum.setOnClickListener(this);
         btnPlusNum.setOnClickListener(this);
@@ -306,6 +309,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mt.execute();
                 initAnimationBackground();
                 animation();
+
+                break;
+
+            case R.id.iv_spart_play2_activity_main:
+                doWhileMethodForStart();
 
                 break;
             case R.id.btn_second_start:
@@ -493,6 +501,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             super.onPostExecute(result);
             frameLayout.setVisibility(View.GONE);
             layoutStart.setVisibility(View.VISIBLE);
+            imageViewStartPlay.setVisibility(View.GONE);
+            imageViewStartPlay2.setVisibility(View.VISIBLE);
         }
     }
 
