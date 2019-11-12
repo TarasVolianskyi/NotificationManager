@@ -115,22 +115,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnStart = findViewById(R.id.btn_start_main_activity);
         btnPause = findViewById(R.id.btn_pause_main_activity);
         btnSecondStart = findViewById(R.id.btn_second_start);
+        btnSecondStart.setOnClickListener(this);
         btnMinusNum = findViewById(R.id.btn_minus_main_activity);
         btnPlusNum = findViewById(R.id.btn_plus_main_activity);
         layoutStart = findViewById(R.id.layout_start_main_activit);
         mainLayout = findViewById(R.id.mainLayout);
+
         frameLayout = findViewById(R.id.frame_layout_main_activity);
         frameLayout.isClickable();
         frameLayout.setOnClickListener(this);
         // btnStart.setOnClickListener(this);
+
         imageViewStartPlay = findViewById(R.id.iv_spart_play_activity_main);
         imageViewStartPlay.setOnClickListener(this);
-        btnSecondStart.setOnClickListener(this);
         tvNunberOfWords = findViewById(R.id.tv_num_of_words_main_activity);
         btnMinusNum.setOnClickListener(this);
         btnPlusNum.setOnClickListener(this);
         myBaseOfWords = new BaseOfWords();
-        linearLayoutLL=findViewById(R.id.ll_spart_play_activity_main);
+        linearLayoutLL = findViewById(R.id.ll_spart_play_activity_main);
         linearLayoutLL.setOnClickListener(this);
         //initSeekBarView();
         //initAnimationBackground();
@@ -142,13 +144,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void animation() {
-         animation = new TranslateAnimation(0, 0, 0, 950);
+        animation = new TranslateAnimation(0, 0, 0, 1050);
         animation.setDuration(1000);
         animation.setFillAfter(true);
         imageViewStartPlay.startAnimation(animation);
 
         videoView.startAnimation(animation);
-        frameLayout.startAnimation(animation);
+        // frameLayout.startAnimation(animation);
 
     }
 
@@ -300,8 +302,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.iv_spart_play_activity_main:
 //                imageViewStartPlay.startAnimation(animation);
-              mt = new MyTask();
-              mt.execute();
+                mt = new MyTask();
+                mt.execute();
                 initAnimationBackground();
                 animation();
 
@@ -309,7 +311,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_second_start:
                 //   runNotification();
                 //  startTimerCountDown();
-           doWhileMethodForStart();
+                doWhileMethodForStart();
                 break;
             case R.id.btn_minus_main_activity:
                 minusNumberOfWords();
@@ -479,7 +481,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected Void doInBackground(Void... params) {
             try {
-                TimeUnit.MILLISECONDS.sleep(2500);
+                TimeUnit.MILLISECONDS.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
