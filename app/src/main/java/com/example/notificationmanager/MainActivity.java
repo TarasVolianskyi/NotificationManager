@@ -313,8 +313,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.iv_spart_play2_activity_main:
-                doWhileMethodForStart();
-
+                // doWhileMethodForStart();
+                Toast.makeText(this, "hellooo", Toast.LENGTH_SHORT).show();
+                imageViewStartPlay2.setVisibility(View.GONE);
+                startvidos();
                 break;
             case R.id.btn_second_start:
                 //   runNotification();
@@ -346,6 +348,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void startvidos() {
         videoView.start();
+        videoView.setVisibility(View.VISIBLE);
         // RunNotification(v);
         imageViewStartPlay.setVisibility(View.GONE);
         frameLayout.setVisibility(View.VISIBLE);
