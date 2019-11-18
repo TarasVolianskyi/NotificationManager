@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView imageViewStartPlay2;
     private MyTask mt;
     private Button btnSecondStart;
-    private Button btnPlusNum;
-    private Button btnMinusNum;
+    private TextView tvPlusNum;
+    private TextView tvMinusNum;
     private int numberOfWords = 3;
     private String language = "EN";
     private int periodOfTime = 3;
@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Thread t;
     private ThreadRun threadRun;
     private LinearLayout linearLayoutLL;
+    private View viewMainAct;
 
 
     @Override
@@ -117,8 +118,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnPause = findViewById(R.id.btn_pause_main_activity);
         btnSecondStart = findViewById(R.id.btn_second_start);
         btnSecondStart.setOnClickListener(this);
-        btnMinusNum = findViewById(R.id.btn_minus_main_activity);
-        btnPlusNum = findViewById(R.id.btn_plus_main_activity);
+        tvMinusNum = findViewById(R.id.tv_minus_main_activity);
+        tvPlusNum = findViewById(R.id.tv_plus_main_activity);
         layoutStart = findViewById(R.id.layout_start_main_activit);
         mainLayout = findViewById(R.id.mainLayout);
 
@@ -132,11 +133,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imageViewStartPlay.setOnClickListener(this);
         imageViewStartPlay2.setOnClickListener(this);
         tvNunberOfWords = findViewById(R.id.tv_num_of_words_main_activity);
-        btnMinusNum.setOnClickListener(this);
-        btnPlusNum.setOnClickListener(this);
+        tvMinusNum.setOnClickListener(this);
+        tvPlusNum.setOnClickListener(this);
         myBaseOfWords = new BaseOfWords();
         linearLayoutLL = findViewById(R.id.ll_spart_play_activity_main);
         linearLayoutLL.setOnClickListener(this);
+        viewMainAct=findViewById(R.id.view_main_activity);
+
         //initSeekBarView();
         //initAnimationBackground();
         videoViewStart();
@@ -147,14 +150,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void animation() {
-        animation = new TranslateAnimation(0, 0, 0, 1050);
+        animation = new TranslateAnimation(0, 0, 0, 1050/2);
         animation.setDuration(1000);
         animation.setFillAfter(true);
         imageViewStartPlay.startAnimation(animation);
-
-        videoView.startAnimation(animation);
+        // videoView.startAnimation(animation);
         // frameLayout.startAnimation(animation);
+    }
 
+    private void animationBack() {
+        animation = new TranslateAnimation(0, 0, 0, -1050/2);
+        animation.setDuration(1000);
+        animation.setFillAfter(true);
+        videoView.startAnimation(animation);
+        // videoView.startAnimation(animation);
+        // frameLayout.startAnimation(animation);
     }
 
     private void adMobView() {
@@ -315,19 +325,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.iv_spart_play2_activity_main:
                 // doWhileMethodForStart();
                 Toast.makeText(this, "hellooo", Toast.LENGTH_SHORT).show();
-                imageViewStartPlay2.setVisibility(View.GONE);
-                startvidos();
+                //imageViewStartPlay2.setVisibility(View.GONE);
+               startvidos();
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                doWhileMethodForStart();
+                animationBack();
+              //  imageViewStartPlay.setVisibility(View.GONE);
+
+              //  imageViewStartPlay2.setVisibility(View.GONE);
+              //  viewMainAct.setVisibility(View.VISIBLE);
+              //  layoutStart.setVisibility(View.GONE);
                 break;
             case R.id.btn_second_start:
                 //   runNotification();
                 //  startTimerCountDown();
                 doWhileMethodForStart();
                 break;
-            case R.id.btn_minus_main_activity:
+            case R.id.tv_minus_main_activity:
                 minusNumberOfWords();
                 testDoWhile();
                 break;
-            case R.id.btn_plus_main_activity:
+            case R.id.tv_plus_main_activity:
                 // plusNumberOfWords();
                 finishTimer();
                 break;
@@ -350,7 +373,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         videoView.start();
         videoView.setVisibility(View.VISIBLE);
         // RunNotification(v);
-        imageViewStartPlay.setVisibility(View.GONE);
+      imageViewStartPlay2.setVisibility(View.GONE);
         frameLayout.setVisibility(View.VISIBLE);
     }
 
@@ -486,7 +509,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            startvidos();
+          //  startvidos();
         }
 
         @Override
@@ -506,6 +529,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             layoutStart.setVisibility(View.VISIBLE);
             imageViewStartPlay.setVisibility(View.GONE);
             imageViewStartPlay2.setVisibility(View.VISIBLE);
+            viewMainAct.setVisibility(View.GONE);
         }
     }
 
