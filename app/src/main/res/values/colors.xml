@@ -8,5 +8,6 @@
     <color name="colorCornerLine">#9ACD32</color>
     <color name="black">#000000</color>
     <color name="neonBlue">#60D4FD</color>
+    <color name="transparent">#80000000</color>
 
 </resources>

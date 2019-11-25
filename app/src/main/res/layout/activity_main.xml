@@ -51,6 +51,11 @@
                 android:layout_height="200dp"
                 android:visibility="gone" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:id="@+id/view_forvisib"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:id="@+id/layout_start_main_activit"
@@ -59,6 +64,7 @@
                 android:orientation="vertical"
                 android:background="@drawable/gradient_list"
                 android:visibility="gone">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"

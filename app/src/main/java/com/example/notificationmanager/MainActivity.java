@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ThreadRun threadRun;
     private LinearLayout linearLayoutLL;
     private View viewMainAct;
+    private View viewForVisibility;
 
 
     @Override
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         linearLayoutLL = findViewById(R.id.ll_spart_play_activity_main);
         linearLayoutLL.setOnClickListener(this);
         viewMainAct=findViewById(R.id.view_main_activity);
-
+        viewForVisibility=findViewById(R.id.view_forvisib);
         //initSeekBarView();
         //initAnimationBackground();
         videoViewStart();
@@ -339,7 +340,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
               //  imageViewStartPlay2.setVisibility(View.GONE);
               //  viewMainAct.setVisibility(View.VISIBLE);
-              //  layoutStart.setVisibility(View.GONE);
+                layoutStart.setVisibility(View.GONE);
+                viewForVisibility.setVisibility(View.VISIBLE);
+               // viewForVisibility.setBackgroundColor(Color.TRANSPARENT);
+
                 break;
             case R.id.btn_second_start:
                 //   runNotification();
@@ -348,11 +352,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.tv_minus_main_activity:
                 minusNumberOfWords();
-                testDoWhile();
+               // testDoWhile();
                 break;
             case R.id.tv_plus_main_activity:
-                // plusNumberOfWords();
-                finishTimer();
+                 plusNumberOfWords();
+               // finishTimer();
                 break;
             case R.id.iv_de_language_main_activity:
                 changeLanguage("DE");
