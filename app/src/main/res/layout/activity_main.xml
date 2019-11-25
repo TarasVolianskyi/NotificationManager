@@ -46,16 +46,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:visibility="gone" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:id="@+id/view_forvisib"
-                android:visibility="gone" />
+
 
             <LinearLayout
                 android:id="@+id/layout_start_main_activit"
@@ -263,6 +255,8 @@
             </LinearLayout>
 
 
+
+
             <LinearLayout
                 android:id="@+id/ll_spart_play_activity_main"
                 android:layout_width="match_parent"
@@ -324,6 +318,11 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:id="@+id/view_forvisib"
+                android:visibility="gone" />
 
             <Button
                 android:visibility="gone"
