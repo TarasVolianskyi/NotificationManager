@@ -48,7 +48,6 @@
 
 
 
-
             <LinearLayout
                 android:id="@+id/layout_start_main_activit"
                 android:layout_width="match_parent"
@@ -56,6 +55,7 @@
                 android:orientation="vertical"
                 android:background="@drawable/gradient_list"
                 android:visibility="gone">
+
 
 
                 <LinearLayout
@@ -255,8 +255,6 @@
             </LinearLayout>
 
 
-
-
             <LinearLayout
                 android:id="@+id/ll_spart_play_activity_main"
                 android:layout_width="match_parent"
@@ -277,12 +275,7 @@
                     android:src="@drawable/ew" />
 
 
-                <ImageView
-                    android:visibility="gone"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:id="@+id/iv_spart_play2_activity_main"
-                    android:src="@drawable/ew" />
+
 
                 <FrameLayout
                     android:visibility="gone"
@@ -303,6 +296,17 @@
 
                 </FrameLayout>
 
+                <ImageView
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:id="@+id/iv_spart_play2_activity_main"
+                    android:src="@drawable/ew" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="700dp"
+                    android:background="@color/black"/>
 
                 <Button
                     android:visibility="gone"
@@ -318,11 +322,6 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:id="@+id/view_forvisib"
-                android:visibility="gone" />
 
             <Button
                 android:visibility="gone"
