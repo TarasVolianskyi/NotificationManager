@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private VideoView videoView;
     private FrameLayout frameLayoutWithVideoInside;
     private ImageView imageViewStartPlay;
-    private ImageView imageViewStartPlay2;
     private MyTask mt;
     private Button btnSecondStart;
     private TextView tvPlusNum;
@@ -93,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout linearLayoutLL;
     private View viewMainAct;
     private View viewForVisibility;
+    private boolean isPictureDown = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,9 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // btnStart.setOnClickListener(this);
 
         imageViewStartPlay = findViewById(R.id.iv_spart_play_activity_main);
-        imageViewStartPlay2 = findViewById(R.id.iv_spart_play2_activity_main);
         imageViewStartPlay.setOnClickListener(this);
-        imageViewStartPlay2.setOnClickListener(this);
         tvNunberOfWords = findViewById(R.id.tv_num_of_words_main_activity);
         tvMinusNum.setOnClickListener(this);
         tvPlusNum.setOnClickListener(this);
@@ -164,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         animation = new TranslateAnimation(0, 0, 0, -1050 / 2);
         animation.setDuration(1000);
         animation.setFillAfter(true);
+        imageViewStartPlay.startAnimation(animation);
         frameLayoutWithVideoInside.startAnimation(animation);
     }
 
@@ -314,37 +313,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_spart_play_activity_main:
-                mt = new MyTask();
-                mt.execute();
-                initAnimationBackground();
-                animation();
+
+
+                if(isPictureDown==false){
+                    isPictureDown=true;
+
+                    mt = new MyTask();
+                    mt.execute();
+                    initAnimationBackground();
+                    animation();
+
+
+                }else if(isPictureDown==true){
+                    isPictureDown=false;
+
+                    Toast.makeText(this, "hellooo", Toast.LENGTH_SHORT).show();
+                    startvidos();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    animationBack();
+                    viewMainAct.setVisibility(View.VISIBLE);
+                    layoutStartDialogView.setVisibility(View.GONE);
+                    imageViewStartPlay.setVisibility(View.GONE);
+                    //frameLayoutWithVideoInside.setVisibility(View.VISIBLE);
+                }
+
                 break;
 
-            case R.id.iv_spart_play2_activity_main:
-                Toast.makeText(this, "hellooo", Toast.LENGTH_SHORT).show();
-                startvidos();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                //  doWhileMethodForStart();
+          /*  case R.id.iv_spart_play2_activity_main:
 
-          /*      frameLayoutWithVideoInside.setVisibility(View.GONE);
-                layoutStartDialogView.setVisibility(View.VISIBLE);
-                imageViewStartPlay.setVisibility(View.GONE);
-                imageViewStartPlay2.setVisibility(View.VISIBLE);
-                viewMainAct.setVisibility(View.GONE);
+
+                break;
 
            */
-                animationBack();
-                viewMainAct.setVisibility(View.VISIBLE);
-                layoutStartDialogView.setVisibility(View.GONE);
-             imageViewStartPlay.setVisibility(View.GONE);
-                imageViewStartPlay2.setVisibility(View.GONE);
-                //frameLayoutWithVideoInside.setVisibility(View.VISIBLE);
-
-                break;
             case R.id.btn_second_start:
                 //   runNotification();
                 //  startTimerCountDown();
@@ -527,8 +532,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             super.onPostExecute(result);
             frameLayoutWithVideoInside.setVisibility(View.GONE);
             layoutStartDialogView.setVisibility(View.VISIBLE);
-            imageViewStartPlay.setVisibility(View.GONE);
-            imageViewStartPlay2.setVisibility(View.VISIBLE);
+           // imageViewStartPlay.setVisibility(View.GONE);
             viewMainAct.setVisibility(View.GONE);
         }
     }
