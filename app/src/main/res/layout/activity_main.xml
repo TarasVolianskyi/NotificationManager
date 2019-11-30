@@ -247,23 +247,32 @@
 
             </LinearLayout>
 
+            <View
+                android:id="@+id/view_main_activity"
+                android:layout_width="match_parent"
+                android:background="@color/neonBlue"
+                android:layout_height="150dp" />
 
             <LinearLayout
                 android:id="@+id/ll_spart_play_activity_main"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="450dp"
+                android:background="@color/colorPrimary"
                 android:orientation="vertical">
 
-                <View
-                    android:id="@+id/view_main_activity"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp" />
 
                 <ImageView
                     android:visibility="visible"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     android:id="@+id/iv_spart_play_activity_main"
+                    android:src="@drawable/ew" />
+
+                <ImageView
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:id="@+id/iv_spart_play2_activity_main"
                     android:src="@drawable/ew" />
 
                 <FrameLayout
@@ -284,12 +293,7 @@
 
                 </FrameLayout>
 
-                <View
-                    android:id="@+id/view2_main_activity"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp" />
             </LinearLayout>
-
 
             <Button
                 android:visibility="gone"
@@ -314,27 +318,24 @@
                 android:layout_height="wrap_content"
                 android:hint="Message" />
 
-
         </LinearLayout>
 
 
+        <ListView
+            android:visibility="gone"
+            android:layout_width="0dp"
+            android:layout_weight="0"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_of_words_main_activity" />
 
-
-    <ListView
-        android:visibility="gone"
-        android:layout_width="0dp"
-        android:layout_weight="0"
-        android:layout_height="wrap_content"
-        android:id="@+id/list_of_words_main_activity" />
-
-    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="120dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3623739700338204/6391104605"></com.google.android.gms.ads.AdView>
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-3623739700338204/6391104605"></com.google.android.gms.ads.AdView>
     </LinearLayout>
 </LinearLayout>
