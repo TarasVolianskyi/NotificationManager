@@ -13,8 +13,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
         <LinearLayout
@@ -49,7 +49,7 @@
             <LinearLayout
                 android:id="@+id/layout_start_main_activit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="300dp"
                 android:orientation="vertical"
                 android:background="@drawable/gradient_list"
                 android:visibility="gone">
@@ -110,9 +110,7 @@
                                     android:text="3 words"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="2"
-                                    android:textColor="@color/neonBlue"
-
-                                    />
+                                    android:textColor="@color/neonBlue" />
 
                                 <TextView
                                     android:id="@+id/tv_plus_main_activity"
@@ -253,7 +251,7 @@
             <LinearLayout
                 android:id="@+id/ll_spart_play_activity_main"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <View
@@ -286,19 +284,10 @@
 
                 </FrameLayout>
 
-
-                <Button
-                    android:visibility="gone"
-                    android:id="@+id/btn_start_main_activity"
-                    android:layout_width="300dp"
-                    android:layout_height="300dp"
-                    android:background="@drawable/gradient_list"
-                    android:padding="6dp"
-                    android:shadowColor="@color/colorPrimary"
-                    android:text="Start"
-                    android:textColor="#D60B0B"
-                    android:textSize="50dp"
-                    android:textStyle="bold" />
+                <View
+                    android:id="@+id/view2_main_activity"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp" />
             </LinearLayout>
 
 
@@ -329,7 +318,7 @@
         </LinearLayout>
 
 
-    </LinearLayout>
+
 
     <ListView
         android:visibility="gone"
@@ -347,5 +336,5 @@
         android:layout_gravity="center"
         ads:adSize="BANNER"
         ads:adUnitId="ca-app-pub-3623739700338204/6391104605"></com.google.android.gms.ads.AdView>
-
+    </LinearLayout>
 </LinearLayout>

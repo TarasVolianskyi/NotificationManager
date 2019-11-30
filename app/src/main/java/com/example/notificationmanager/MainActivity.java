@@ -14,6 +14,7 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
@@ -54,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText editTextMessage;
     private SeekBar seekBar;
     public TextView textViewSeekbar;
-    private Button btnStart;
     private Button btnPause;
     private LinearLayout layoutStartDialogView;
     private ArrayList<String> arrayList1;
@@ -116,7 +116,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextMessage = findViewById(R.id.edit_text_message);
         tvTest = findViewById(R.id.tv_test_text);
-        btnStart = findViewById(R.id.btn_start_main_activity);
         btnPause = findViewById(R.id.btn_pause_main_activity);
         btnSecondStart = findViewById(R.id.btn_second_start);
         btnSecondStart.setOnClickListener(this);
@@ -153,15 +152,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         animation = new TranslateAnimation(0, 0, 0, 1050 / 2);
         animation.setDuration(1000);
         animation.setFillAfter(true);
+      //  linearLayoutLL.setAnimation(animation);
         imageViewStartPlay.startAnimation(animation);
-        // videoView.startAnimation(animation);
-        // frameLayoutWithVideoInside.startAnimation(animation);
+        frameLayoutWithVideoInside.startAnimation(animation);
+
     }
 
     private void animationBack() {
         animation = new TranslateAnimation(0, 0, 0, -1050 / 2);
         animation.setDuration(1000);
         animation.setFillAfter(true);
+        linearLayoutLL.setAnimation(animation);
         imageViewStartPlay.startAnimation(animation);
         frameLayoutWithVideoInside.startAnimation(animation);
     }
@@ -315,8 +316,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.iv_spart_play_activity_main:
 
 
-                if(isPictureDown==false){
-                    isPictureDown=true;
+                if (isPictureDown == false) {
+                    isPictureDown = true;
 
                     mt = new MyTask();
                     mt.execute();
@@ -324,8 +325,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     animation();
 
 
-                }else if(isPictureDown==true){
-                    isPictureDown=false;
+                } else if (isPictureDown == true) {
+                    isPictureDown = false;
 
                     Toast.makeText(this, "hellooo", Toast.LENGTH_SHORT).show();
                     startvidos();
@@ -336,7 +337,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
                     animationBack();
-                    viewMainAct.setVisibility(View.VISIBLE);
+                    //viewMainAct.setVisibility(View.VISIBLE);
                     layoutStartDialogView.setVisibility(View.GONE);
                     imageViewStartPlay.setVisibility(View.GONE);
                     //frameLayoutWithVideoInside.setVisibility(View.VISIBLE);
@@ -399,10 +400,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void unvisibilityForStartbutton() {
-        btnStart.setVisibility(View.GONE);
-        btnPause.setVisibility(View.GONE);
-    }
 
     private void visibilityForListView() {
         listView.setVisibility(View.VISIBLE);
@@ -530,10 +527,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
+            // viewMainAct.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+           // viewMainAct.setVisibility(View.GONE);
+            linearLayoutLL.setVisibility(View.VISIBLE);
+            imageViewStartPlay.setVisibility(View.VISIBLE);
+            linearLayoutLL.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300));
             frameLayoutWithVideoInside.setVisibility(View.GONE);
             layoutStartDialogView.setVisibility(View.VISIBLE);
-           // imageViewStartPlay.setVisibility(View.GONE);
-            viewMainAct.setVisibility(View.GONE);
+
         }
     }
 
