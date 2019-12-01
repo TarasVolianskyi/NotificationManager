@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout linearLayoutLL;
     private View viewMainAct;
     private View viewForVisibility;
-
+private CountDownBL countDownBL;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
+        countDownBL=new CountDownBL();
         notificationManager = NotificationManagerCompat.from(this);
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextMessage = findViewById(R.id.edit_text_message);
@@ -332,8 +333,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.iv_spart_play_activity_main:
                 initAnimationBackground();
                 animation();
-
-            //    animation0();
                 mt = new MyTask();
                 mt.execute();
 
@@ -353,15 +352,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                  */
                 animation0();
                 animationBack();
-
-
                 viewMainAct.setVisibility(View.VISIBLE);
                 viewMainAct.setLayoutParams(new LinearLayout.LayoutParams(20, 1050));
                 layoutStartDialogView.setVisibility(View.GONE);
-
                 imageViewStartPlay2.setVisibility(View.GONE);
                 imageViewStartPlay.setVisibility(View.GONE);
                 frameLayoutWithVideoInside.setVisibility(View.VISIBLE);
+//BL PART
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+               // runNotification();
+countDownBL.startTimer();
 
                 break;
 
@@ -618,5 +622,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cTimer.cancel();
         //Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
     }
+
+
+    public int getPeriodOfTime() {
+        return periodOfTime;
+    }
+
 
 }

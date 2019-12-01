@@ -20,6 +20,7 @@ public class ThreadRun extends Thread {
                 // mainActivity.runNotification();
                 // mainActivity.textViewSeekbar.setText(i+"fd");
                 Thread.sleep(3000);
+                mainActivity.runNotification();
                 Log.d(TAG, "run: " + i);
             } catch (InterruptedException e) {
                 e.printStackTrace();
