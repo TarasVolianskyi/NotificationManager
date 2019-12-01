@@ -24,7 +24,6 @@ public class MyArrayAdapter extends ArrayAdapter<MyDataModel> {
         modelList = objects;
     }
 
-
     @Override
     public MyDataModel getItem(int position) {
         return modelList.get(position);
@@ -46,7 +45,6 @@ public class MyArrayAdapter extends ArrayAdapter<MyDataModel> {
         vh.textViewCountry.setText(item.getCountry());
         return vh.rootView;
     }
-
 
     private static class ViewHolder {
         public final LinearLayout rootView;

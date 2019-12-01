@@ -153,19 +153,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         animation = new TranslateAnimation(0, 0, 0, 1050 / 2);
         animation.setDuration(1000);
         animation.setFillAfter(true);
-        imageViewStartPlay.startAnimation(animation);
+    imageViewStartPlay.startAnimation(animation);
         frameLayoutWithVideoInside.startAnimation(animation);
+
+
+      //  linearLayoutLL.startAnimation(animation);
+
+    }
+    private void animation0() {
+        animation = new TranslateAnimation(0, 0, 0, -1050 / 2);
+        animation.setDuration(1000);
+        animation.setFillAfter(true);
+    //   imageViewStartPlay.startAnimation(animation);
+     //   frameLayoutWithVideoInside.startAnimation(animation);
+
+
+      linearLayoutLL.startAnimation(animation);
 
     }
 
+
     private void animationBack() {
-        animation = new TranslateAnimation(0, 0, 0, -1050 / 4);
+        animation = new TranslateAnimation(0, 0, 0, -1050 / 5);
         animation.setDuration(1000);
         animation.setFillAfter(true);
-        imageViewStartPlay2.startAnimation(animation);
+      imageViewStartPlay2.startAnimation(animation);
         imageViewStartPlay.startAnimation(animation);
-
         frameLayoutWithVideoInside.startAnimation(animation);
+
+
+       // linearLayoutLL.startAnimation(animation);
     }
 
     private void adMobView() {
@@ -315,6 +332,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.iv_spart_play_activity_main:
                 initAnimationBackground();
                 animation();
+
+            //    animation0();
                 mt = new MyTask();
                 mt.execute();
 
@@ -324,20 +343,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Toast.makeText(this, "hellknmllooo", Toast.LENGTH_SHORT).show();
 
                 startvidos();
+                /*
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
+                 */
+                animation0();
                 animationBack();
 
+
                 viewMainAct.setVisibility(View.VISIBLE);
-                viewMainAct.setLayoutParams(new LinearLayout.LayoutParams(20, 450));
+                viewMainAct.setLayoutParams(new LinearLayout.LayoutParams(20, 1050));
                 layoutStartDialogView.setVisibility(View.GONE);
 
                 imageViewStartPlay2.setVisibility(View.GONE);
                 imageViewStartPlay.setVisibility(View.GONE);
-               frameLayoutWithVideoInside.setVisibility(View.VISIBLE);
+                frameLayoutWithVideoInside.setVisibility(View.VISIBLE);
+
                 break;
 
 
@@ -517,8 +542,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-         //   viewMainAct.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
-           viewMainAct.setVisibility(View.GONE);
+            //   viewMainAct.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+            viewMainAct.setVisibility(View.GONE);
             //  linearLayoutLL.setVisibility(View.VISIBLE);
             imageViewStartPlay.setVisibility(View.GONE);
             imageViewStartPlay2.setVisibility(View.VISIBLE);

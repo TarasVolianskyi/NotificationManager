@@ -44,6 +44,7 @@
 
             <View
                 android:layout_width="match_parent"
+                android:background="@color/black"
                 android:layout_height="50dp" />
 
             <LinearLayout
@@ -250,14 +251,14 @@
             <View
                 android:id="@+id/view_main_activity"
                 android:layout_width="match_parent"
-                android:background="@color/neonBlue"
+                android:background="@color/black"
                 android:layout_height="150dp" />
 
             <LinearLayout
                 android:id="@+id/ll_spart_play_activity_main"
                 android:layout_width="match_parent"
                 android:layout_height="450dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/black"
                 android:orientation="vertical">
 
 
@@ -276,13 +277,13 @@
                     android:src="@drawable/ew" />
 
                 <FrameLayout
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:id="@+id/frame_layout_main_activity"
                     android:layout_width="match_parent"
                     android:layout_height="300dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    android:background="@color/neonBlue"
+                    android:background="@color/black"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
