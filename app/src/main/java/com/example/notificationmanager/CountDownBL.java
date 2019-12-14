@@ -5,36 +5,26 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.Locale;
 
 public class CountDownBL extends AppCompatActivity {
 
     MainActivity mainActivity = new MainActivity();
-    private long START_TIME_IN_MILLIS = mainActivity.getPeriodOfTime() * 1000;
-
+    private long START_TIME_IN_MILLIS = 999999999 * 999999999;
+    private int chosedTime = mainActivity.getPeriodOfTime() * 1;
     private TextView mTextViewCountDown;
     private Button mButtonStartPause;
     private Button mButtonReset;
 
     private CountDownTimer mCountDownTimer;
-
     private boolean mTimerRunning;
-
     private long mTimeLeftInMillis;
     private long mEndTime;
 
     private void initVieww() {
-/*
-        mTextViewCountDown = findViewById(R.id.text_view_countdown);
 
-        mButtonStartPause = findViewById(R.id.button_start_pause);
-        mButtonReset = findViewById(R.id.button_reset);
-
-
- */
         mButtonStartPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,28 +45,27 @@ public class CountDownBL extends AppCompatActivity {
     }
 
     public void startTimer() {
-        mEndTime = System.currentTimeMillis() + mTimeLeftInMillis;
 
-        mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
+        mEndTime = System.currentTimeMillis() + mTimeLeftInMillis;
+//        mainActivity.runNotification();
+        mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 3000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 mTimeLeftInMillis = millisUntilFinished;
-               // updateCountDownText();
+                // updateCountDownText();
                 mainActivity.runNotification();
-
             }
 
             @Override
             public void onFinish() {
                 mTimerRunning = false;
-//                mainActivity.runNotification();
-
+//               mainActivity.runNotification();
                 // updateButtons();
             }
         }.start();
 
         mTimerRunning = true;
-       // updateButtons();
+        // updateButtons();
     }
 
     private void pauseTimer() {
@@ -93,12 +82,15 @@ public class CountDownBL extends AppCompatActivity {
     }
 
     private void updateCountDownText() {
-        int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
+
+        /* int minutes = (int) (mTimeLeftInMillis / 1000) / 60;
         int seconds = (int) (mTimeLeftInMillis / 1000) % 60;
-
         String timeLeftFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
-
         mTextViewCountDown.setText(timeLeftFormatted);
+   */
+
+        Toast.makeText(mainActivity, "ewewew", Toast.LENGTH_SHORT).show();
+        mainActivity.runNotification();
     }
 
     private void updateButtons() {

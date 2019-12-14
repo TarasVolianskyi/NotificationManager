@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvMinusNum;
     private int numberOfWords = 3;
     private String language = "EN";
-    private int periodOfTime = 3;
+    private int periodOfTime = 4;
     public int periodOfTimeInSeconds = 1000;
 
     //  private int periodOfTimeInSeconds = 900000;
@@ -92,7 +92,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout linearLayoutLL;
     private View viewMainAct;
     private View viewForVisibility;
-private CountDownBL countDownBL;
+   // private CountDownBL countDownBL;
+    private CountDownTimer myCountDownTimer;
+    ////
+    private long START_TIME_IN_MILLIS = 999999999 * 999999999;
+    private TextView mTextViewCountDown;
+    private Button mButtonStartPause;
+    private Button mButtonReset;
+
+    private CountDownTimer mCountDownTimer;
+    private boolean mTimerRunning;
+    private long mTimeLeftInMillis;
+    private long mEndTime;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,7 +124,7 @@ private CountDownBL countDownBL;
     }
 
     private void initView() {
-        countDownBL=new CountDownBL();
+      //  countDownBL = new CountDownBL();
         notificationManager = NotificationManagerCompat.from(this);
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextMessage = findViewById(R.id.edit_text_message);
@@ -148,28 +161,30 @@ private CountDownBL countDownBL;
         initFlagImages();
         adMobView();
 
+
     }
 
     private void animation() {
         animation = new TranslateAnimation(0, 0, 0, 1050 / 2);
         animation.setDuration(1000);
         animation.setFillAfter(true);
-    imageViewStartPlay.startAnimation(animation);
+        imageViewStartPlay.startAnimation(animation);
         frameLayoutWithVideoInside.startAnimation(animation);
 
 
-      //  linearLayoutLL.startAnimation(animation);
+        //  linearLayoutLL.startAnimation(animation);
 
     }
+
     private void animation0() {
         animation = new TranslateAnimation(0, 0, 0, -1050 / 2);
         animation.setDuration(1000);
         animation.setFillAfter(true);
-    //   imageViewStartPlay.startAnimation(animation);
-     //   frameLayoutWithVideoInside.startAnimation(animation);
+        //   imageViewStartPlay.startAnimation(animation);
+        //   frameLayoutWithVideoInside.startAnimation(animation);
 
 
-      linearLayoutLL.startAnimation(animation);
+        linearLayoutLL.startAnimation(animation);
 
     }
 
@@ -178,12 +193,12 @@ private CountDownBL countDownBL;
         animation = new TranslateAnimation(0, 0, 0, -1050 / 5);
         animation.setDuration(1000);
         animation.setFillAfter(true);
-      imageViewStartPlay2.startAnimation(animation);
+        imageViewStartPlay2.startAnimation(animation);
         imageViewStartPlay.startAnimation(animation);
         frameLayoutWithVideoInside.startAnimation(animation);
 
 
-       // linearLayoutLL.startAnimation(animation);
+        // linearLayoutLL.startAnimation(animation);
     }
 
     private void adMobView() {
@@ -339,16 +354,17 @@ private CountDownBL countDownBL;
                 break;
 
             case R.id.iv_spart_play2_activity_main:
-                Toast.makeText(this, "hellknmllooo", Toast.LENGTH_SHORT).show();
-
+                // Toast.makeText(this, "hellknmllooo", Toast.LENGTH_SHORT).show();
                 startvidos();
+                //  countDownBL.startTimer();
+               // startTimer();
+                startCountDown();
                 /*
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
                  */
                 animation0();
                 animationBack();
@@ -364,14 +380,10 @@ private CountDownBL countDownBL;
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-               // runNotification();
-countDownBL.startTimer();
-
+                // runNotification();
                 break;
-
-
             case R.id.btn_second_start:
-                //   runNotification();
+                //  runNotification();
                 //  startTimerCountDown();
                 doWhileMethodForStart();
                 break;
@@ -609,7 +621,6 @@ countDownBL.startTimer();
             public void onTick(long millisUntilFinished) {
                 textViewSeekbar.setText("seconds remaining: " + millisUntilFinished / 1000);
                 //   Toast.makeText(MainActivity.this, "seconds remaining: " + millisUntilFinished / 1000, Toast.LENGTH_SHORT).show();
-
             }
 
             public void onFinish() {
@@ -627,6 +638,27 @@ countDownBL.startTimer();
     public int getPeriodOfTime() {
         return periodOfTime;
     }
+
+
+    /////////////////////
+    private void startCountDown(){
+
+    myCountDownTimer=    new CountDownTimer(10000, 2000){
+            public void onTick(long millisUntilFinished){
+runNotification();
+                Toast.makeText(MainActivity.this, "erere", Toast.LENGTH_SHORT).show();
+            }
+            public  void onFinish(){
+                Toast.makeText(MainActivity.this, "fffiiiiinnnniiiished", Toast.LENGTH_SHORT).show();            }
+        }.start();
+    }
+
+    private void stopCountDown() {
+    myCountDownTimer.cancel();
+
+    }
+
+
 
 
 }
