@@ -2,6 +2,7 @@ package com.example.notificationmanager;
 
 import android.app.Notification;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private View viewForVisibility;
    // private CountDownBL countDownBL;
     private CountDownTimer myCountDownTimer;
+    private Boolean myBool=true;
     ////
     private long START_TIME_IN_MILLIS = 999999999 * 999999999;
     private TextView mTextViewCountDown;
@@ -112,6 +114,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         initView();
     }
+
+    protected void onStart() {
+        super.onStart();
+        initView();
+        Toast.makeText(this, "hello On Start nowww", Toast.LENGTH_SHORT).show();
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+
+        mTimeLeftInMillis = prefs.getLong("millisLeft", START_TIME_IN_MILLIS);
+        mTimerRunning = prefs.getBoolean("timerRunning", false);
+
+    //    updateCountDownText();
+    //    updateButtons();
+
+        if (mTimerRunning) {
+            mEndTime = prefs.getLong("endTime", 0);
+            mTimeLeftInMillis = mEndTime - System.currentTimeMillis();
+
+            if (mTimeLeftInMillis < 0) {
+                mTimeLeftInMillis = 0;
+                mTimerRunning = false;
+     //           updateCountDownText();
+     //           updateButtons();
+            } else {
+      //          startTimer();
+            }
+        }
+    }
+
+
+    protected void onStop() {
+        super.onStop();
+        Toast.makeText(this, "hello On stop nowww", Toast.LENGTH_SHORT).show();
+
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+
+        editor.putLong("millisLeft", mTimeLeftInMillis);
+        editor.putBoolean("timerRunning", mTimerRunning);
+        editor.putLong("endTime", mEndTime);
+
+        editor.apply();
+
+        if (mCountDownTimer != null) {
+            mCountDownTimer.cancel();
+        }
+    }
+
 
     private void videoViewStart() {
 
@@ -153,6 +202,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         linearLayoutLL = findViewById(R.id.ll_spart_play_activity_main);
         linearLayoutLL.setOnClickListener(this);
         viewMainAct = findViewById(R.id.view_main_activity);
+
+        btnPause.setOnClickListener(this);
         //  viewForVisibility = findViewById(R.id.view_forvisib);
         //initSeekBarView();
         //initAnimationBackground();
@@ -354,11 +405,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.iv_spart_play2_activity_main:
-                // Toast.makeText(this, "hellknmllooo", Toast.LENGTH_SHORT).show();
-                startvidos();
-                //  countDownBL.startTimer();
-               // startTimer();
-                startCountDown();
+
+               if(myBool=true){
+                   myBool=false;
+                   // Toast.makeText(this, "hellknmllooo", Toast.LENGTH_SHORT).show();
+                   startvidos();
+                   //  countDownBL.startTimer();
+                   // startTimer();
+                   startCountDown();
                 /*
                 try {
                     Thread.sleep(1000);
@@ -366,26 +420,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     e.printStackTrace();
                 }
                  */
-                animation0();
-                animationBack();
-                viewMainAct.setVisibility(View.VISIBLE);
-                viewMainAct.setLayoutParams(new LinearLayout.LayoutParams(20, 1050));
-                layoutStartDialogView.setVisibility(View.GONE);
-                imageViewStartPlay2.setVisibility(View.GONE);
-                imageViewStartPlay.setVisibility(View.GONE);
-                frameLayoutWithVideoInside.setVisibility(View.VISIBLE);
-//BL PART
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                // runNotification();
+                   animation0();
+                   animationBack();
+                   viewMainAct.setVisibility(View.VISIBLE);
+                   viewMainAct.setLayoutParams(new LinearLayout.LayoutParams(20, 1050));
+                   layoutStartDialogView.setVisibility(View.GONE);
+                   imageViewStartPlay2.setVisibility(View.GONE);
+                   imageViewStartPlay.setVisibility(View.GONE);
+                   frameLayoutWithVideoInside.setVisibility(View.VISIBLE);
+                   //BL PART
+                   try {
+                       Thread.sleep(1000);
+                   } catch (InterruptedException e) {
+                       e.printStackTrace();
+                   }
+                   // runNotification();
+               }else if(myBool=false){
+                   myBool=true;
+                   stopCountDown();
+                   Toast.makeText(this, "mrfpeimf-----", Toast.LENGTH_SHORT).show();
+               }
+
                 break;
-            case R.id.btn_second_start:
+            case R.id.btn_pause_main_activity:
                 //  runNotification();
                 //  startTimerCountDown();
-                doWhileMethodForStart();
+ //               doWhileMethodForStart();
+                Toast.makeText(this, "frame ckick", Toast.LENGTH_SHORT).show();
+                stopCountDown();
                 break;
             case R.id.tv_minus_main_activity:
                 minusNumberOfWords();
@@ -643,7 +705,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     /////////////////////
     private void startCountDown(){
 
-    myCountDownTimer=    new CountDownTimer(10000, 2000){
+    myCountDownTimer=    new CountDownTimer(START_TIME_IN_MILLIS, 3000){
             public void onTick(long millisUntilFinished){
 runNotification();
                 Toast.makeText(MainActivity.this, "erere", Toast.LENGTH_SHORT).show();
@@ -655,7 +717,7 @@ runNotification();
 
     private void stopCountDown() {
     myCountDownTimer.cancel();
-
+        Toast.makeText(this, "cancel timer", Toast.LENGTH_SHORT).show();
     }
 
 

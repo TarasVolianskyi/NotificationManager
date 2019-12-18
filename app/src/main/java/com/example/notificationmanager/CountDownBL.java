@@ -47,7 +47,7 @@ public class CountDownBL extends AppCompatActivity {
     public void startTimer() {
 
         mEndTime = System.currentTimeMillis() + mTimeLeftInMillis;
-//        mainActivity.runNotification();
+//  mainActivity.runNotification();
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 3000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -59,7 +59,7 @@ public class CountDownBL extends AppCompatActivity {
             @Override
             public void onFinish() {
                 mTimerRunning = false;
-//               mainActivity.runNotification();
+                // mainActivity.runNotification();
                 // updateButtons();
             }
         }.start();
