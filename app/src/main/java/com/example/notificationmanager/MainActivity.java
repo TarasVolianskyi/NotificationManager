@@ -1,5 +1,6 @@
 package com.example.notificationmanager;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
@@ -93,9 +94,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout linearLayoutLL;
     private View viewMainAct;
     private View viewForVisibility;
-   // private CountDownBL countDownBL;
+    // private CountDownBL countDownBL;
     private CountDownTimer myCountDownTimer;
-    private Boolean myBool=true;
+    private Boolean myBool = true;
     ////
     private long START_TIME_IN_MILLIS = 999999999 * 999999999;
     private TextView mTextViewCountDown;
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean mTimerRunning;
     private long mTimeLeftInMillis;
     private long mEndTime;
-
+private MyService myService = new MyService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,8 +125,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mTimeLeftInMillis = prefs.getLong("millisLeft", START_TIME_IN_MILLIS);
         mTimerRunning = prefs.getBoolean("timerRunning", false);
 
-    //    updateCountDownText();
-    //    updateButtons();
+        //    updateCountDownText();
+        //    updateButtons();
 
         if (mTimerRunning) {
             mEndTime = prefs.getLong("endTime", 0);
@@ -134,10 +135,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (mTimeLeftInMillis < 0) {
                 mTimeLeftInMillis = 0;
                 mTimerRunning = false;
-     //           updateCountDownText();
-     //           updateButtons();
+                //           updateCountDownText();
+                //           updateButtons();
             } else {
-      //          startTimer();
+                //          startTimer();
             }
         }
     }
@@ -173,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
-      //  countDownBL = new CountDownBL();
+        //  countDownBL = new CountDownBL();
         notificationManager = NotificationManagerCompat.from(this);
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextMessage = findViewById(R.id.edit_text_message);
@@ -406,13 +407,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.iv_spart_play2_activity_main:
 
-               if(myBool=true){
-                   myBool=false;
-                   // Toast.makeText(this, "hellknmllooo", Toast.LENGTH_SHORT).show();
-                   startvidos();
-                   //  countDownBL.startTimer();
-                   // startTimer();
-                   startCountDown();
+                if (myBool = true) {
+                    myBool = false;
+                    // Toast.makeText(this, "hellknmllooo", Toast.LENGTH_SHORT).show();
+                    startvidos();
+                    //  countDownBL.startTimer();
+                    // startTimer();
+                    startCountDown();
                 /*
                 try {
                     Thread.sleep(1000);
@@ -420,34 +421,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     e.printStackTrace();
                 }
                  */
-                   animation0();
-                   animationBack();
-                   viewMainAct.setVisibility(View.VISIBLE);
-                   viewMainAct.setLayoutParams(new LinearLayout.LayoutParams(20, 1050));
-                   layoutStartDialogView.setVisibility(View.GONE);
-                   imageViewStartPlay2.setVisibility(View.GONE);
-                   imageViewStartPlay.setVisibility(View.GONE);
-                   frameLayoutWithVideoInside.setVisibility(View.VISIBLE);
-                   //BL PART
-                   try {
-                       Thread.sleep(1000);
-                   } catch (InterruptedException e) {
-                       e.printStackTrace();
-                   }
-                   // runNotification();
-               }else if(myBool=false){
-                   myBool=true;
-                   stopCountDown();
-                   Toast.makeText(this, "mrfpeimf-----", Toast.LENGTH_SHORT).show();
-               }
+                    animation0();
+                    animationBack();
+                    viewMainAct.setVisibility(View.VISIBLE);
+                    viewMainAct.setLayoutParams(new LinearLayout.LayoutParams(20, 1050));
+                    layoutStartDialogView.setVisibility(View.GONE);
+                    imageViewStartPlay2.setVisibility(View.GONE);
+                    imageViewStartPlay.setVisibility(View.GONE);
+                    frameLayoutWithVideoInside.setVisibility(View.VISIBLE);
+                    btnPause.setVisibility(View.VISIBLE);
+
+                    //BL PART
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    // runNotification();
+                } else if (myBool = false) {
+                    myBool = true;
+                    stopCountDown();
+                    Toast.makeText(this, "mrfpeimf-----", Toast.LENGTH_SHORT).show();
+                }
 
                 break;
             case R.id.btn_pause_main_activity:
                 //  runNotification();
                 //  startTimerCountDown();
- //               doWhileMethodForStart();
-                Toast.makeText(this, "frame ckick", Toast.LENGTH_SHORT).show();
+                //               doWhileMethodForStart();
+                // Toast.makeText(this, "frame ckick", Toast.LENGTH_SHORT).show();
                 stopCountDown();
+                btnPause.setVisibility(View.GONE);
+                //  startService(new Intent(MainActivity.this, MyService.class));
                 break;
             case R.id.tv_minus_main_activity:
                 minusNumberOfWords();
@@ -703,24 +708,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     /////////////////////
-    private void startCountDown(){
+    private void startCountDown() {
 
-    myCountDownTimer=    new CountDownTimer(START_TIME_IN_MILLIS, 3000){
-            public void onTick(long millisUntilFinished){
-runNotification();
-                Toast.makeText(MainActivity.this, "erere", Toast.LENGTH_SHORT).show();
+        myCountDownTimer = new CountDownTimer(START_TIME_IN_MILLIS, 3000) {
+            @SuppressLint("WrongConstant")
+            public void onTick(long millisUntilFinished) {
+                runNotification();
+          //      Toast.makeText(MainActivity.this, "er890ere", Toast.LENGTH_SHORT).show();
+        //  myService.onStartCommand(new Intent(),66,1);
+
             }
-            public  void onFinish(){
-                Toast.makeText(MainActivity.this, "fffiiiiinnnniiiished", Toast.LENGTH_SHORT).show();            }
+
+            public void onFinish() {
+                Toast.makeText(MainActivity.this, "fffiiiiinnnniiiished", Toast.LENGTH_SHORT).show();
+            }
         }.start();
     }
 
     private void stopCountDown() {
-    myCountDownTimer.cancel();
+        myCountDownTimer.cancel();
         Toast.makeText(this, "cancel timer", Toast.LENGTH_SHORT).show();
     }
 
+    private void testOfService(){
 
+
+
+    }
 
 
 }
