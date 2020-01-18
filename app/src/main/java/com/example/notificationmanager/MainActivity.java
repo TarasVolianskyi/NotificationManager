@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean mTimerRunning;
     private long mTimeLeftInMillis;
     private long mEndTime;
-private MyService myService = new MyService();
+    private MyService myService = new MyService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -234,8 +234,6 @@ private MyService myService = new MyService();
         animation.setFillAfter(true);
         //   imageViewStartPlay.startAnimation(animation);
         //   frameLayoutWithVideoInside.startAnimation(animation);
-
-
         linearLayoutLL.startAnimation(animation);
 
     }
@@ -421,6 +419,7 @@ private MyService myService = new MyService();
                     e.printStackTrace();
                 }
                  */
+
                     animation0();
                     animationBack();
                     viewMainAct.setVisibility(View.VISIBLE);
@@ -452,6 +451,17 @@ private MyService myService = new MyService();
                 // Toast.makeText(this, "frame ckick", Toast.LENGTH_SHORT).show();
                 stopCountDown();
                 btnPause.setVisibility(View.GONE);
+
+                viewMainAct.setVisibility(View.VISIBLE);
+                imageViewStartPlay2.setVisibility(View.GONE);
+                layoutStartDialogView.setVisibility(View.GONE);
+                frameLayoutWithVideoInside.setVisibility(View.GONE);
+                imageViewStartPlay.setVisibility(View.VISIBLE);
+
+                //  imageViewStartPlay.setVisibility(View.VISIBLE);
+                //   frameLayoutWithVideoInside.setVisibility(View.GONE);
+
+
                 //  startService(new Intent(MainActivity.this, MyService.class));
                 break;
             case R.id.tv_minus_main_activity:
@@ -714,8 +724,8 @@ private MyService myService = new MyService();
             @SuppressLint("WrongConstant")
             public void onTick(long millisUntilFinished) {
                 runNotification();
-          //      Toast.makeText(MainActivity.this, "er890ere", Toast.LENGTH_SHORT).show();
-        //  myService.onStartCommand(new Intent(),66,1);
+                //      Toast.makeText(MainActivity.this, "er890ere", Toast.LENGTH_SHORT).show();
+                //  myService.onStartCommand(new Intent(),66,1);
 
             }
 
@@ -730,8 +740,7 @@ private MyService myService = new MyService();
         Toast.makeText(this, "cancel timer", Toast.LENGTH_SHORT).show();
     }
 
-    private void testOfService(){
-
+    private void testOfService() {
 
 
     }
