@@ -251,28 +251,28 @@
             <View
                 android:id="@+id/view_main_activity"
                 android:layout_width="match_parent"
-                android:background="@color/black"
+                android:background="@color/colorAccent"
                 android:layout_height="150dp" />
 
             <LinearLayout
                 android:id="@+id/ll_spart_play_activity_main"
                 android:layout_width="match_parent"
                 android:layout_height="450dp"
-                android:background="@color/black"
+                android:background="@color/colorPrimary"
                 android:orientation="vertical">
 
 
                 <ImageView
                     android:visibility="visible"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="330dp"
                     android:id="@+id/iv_spart_play_activity_main"
                     android:src="@drawable/ew" />
 
                 <ImageView
                     android:visibility="gone"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="330dp"
                     android:id="@+id/iv_spart_play2_activity_main"
                     android:src="@drawable/ew" />
 
@@ -289,6 +289,7 @@
 
                     <VideoView
                         android:id="@+id/video_view"
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="300dp" />
 

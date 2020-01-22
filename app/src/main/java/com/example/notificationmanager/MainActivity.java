@@ -216,16 +216,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /*21.01.12
     private void animation() {
         animation = new TranslateAnimation(0, 0, 0, 1050 / 2);
         animation.setDuration(1000);
         animation.setFillAfter(true);
         imageViewStartPlay.startAnimation(animation);
         frameLayoutWithVideoInside.startAnimation(animation);
-
-
+        //  imageViewStartPlay2.startAnimation(animation);
         //  linearLayoutLL.startAnimation(animation);
+    }
 
+    private void animation0() {
+        animation = new TranslateAnimation(0, 0, 0, -1050 / 2);
+        animation.setDuration(1000);
+        animation.setFillAfter(true);
+        frameLayoutWithVideoInside.startAnimation(animation);
+
+        //   imageViewStartPlay.startAnimation(animation);
+        //  imageViewStartPlay2.startAnimation(animation);
+        // linearLayoutLL.startAnimation(animation);
+    }
+
+
+    private void animationBack0() {
+        animation = new TranslateAnimation(0, 0, 0, 1050 / 2);
+        animation.setDuration(1000);
+        animation.setFillAfter(true);
+        linearLayoutLL.startAnimation(animation);
+        // imageViewStartPlay2.startAnimation(animation);
+        // imageViewStartPlay.startAnimation(animation);
+        // frameLayoutWithVideoInside.startAnimation(animation);
+    }
+
+    private void animationBack20() {
+        animation = new TranslateAnimation(0, 0, 0, -1050 / 2);
+        animation.setDuration(1000);
+        animation.setFillAfter(true);
+        imageViewStartPlay.startAnimation(animation);
+        frameLayoutWithVideoInside.startAnimation(animation);
+        //  imageViewStartPlay2.startAnimation(animation);
+        //  linearLayoutLL.startAnimation(animation);
+    }*/
+
+    private void animation() {
+        animation = new TranslateAnimation(0, 0, 0, 1050 / 2);
+        animation.setDuration(1000);
+        animation.setFillAfter(true);
+        imageViewStartPlay.startAnimation(animation);
+        frameLayoutWithVideoInside.startAnimation(animation);
+        //  linearLayoutLL.startAnimation(animation);
     }
 
     private void animation0() {
@@ -235,9 +275,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //   imageViewStartPlay.startAnimation(animation);
         //   frameLayoutWithVideoInside.startAnimation(animation);
         linearLayoutLL.startAnimation(animation);
-
     }
-
 
     private void animationBack() {
         animation = new TranslateAnimation(0, 0, 0, -1050 / 5);
@@ -246,11 +284,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imageViewStartPlay2.startAnimation(animation);
         imageViewStartPlay.startAnimation(animation);
         frameLayoutWithVideoInside.startAnimation(animation);
-
-
-        // linearLayoutLL.startAnimation(animation);
     }
 
+
+    private void animationZ() {
+        animation = new TranslateAnimation(0, 0, 0, -1050 / 2);
+        animation.setDuration(0);
+        animation.setFillAfter(true);
+        imageViewStartPlay.startAnimation(animation);
+        frameLayoutWithVideoInside.startAnimation(animation);
+        //  linearLayoutLL.startAnimation(animation);
+    }
+
+    private void animation0Z() {
+        animation = new TranslateAnimation(0, 0, 0, 1050 / 2);
+        animation.setDuration(0);
+        animation.setFillAfter(true);
+        //   imageViewStartPlay.startAnimation(animation);
+        //   frameLayoutWithVideoInside.startAnimation(animation);
+        linearLayoutLL.startAnimation(animation);
+    }
+
+    private void animationBackZ() {
+        animation = new TranslateAnimation(0, 0, 0, 1050 / 5);
+        animation.setDuration(0);
+        animation.setFillAfter(true);
+        imageViewStartPlay2.startAnimation(animation);
+        imageViewStartPlay.startAnimation(animation);
+        frameLayoutWithVideoInside.startAnimation(animation);
+    }
     private void adMobView() {
         MobileAds.initialize(this, "ca-app-pub-3623739700338204~6535393075");
         AdView mAdView = findViewById(R.id.adView);
@@ -400,14 +462,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 animation();
                 mt = new MyTask();
                 mt.execute();
-
                 break;
 
             case R.id.iv_spart_play2_activity_main:
 
                 if (myBool = true) {
                     myBool = false;
-                    // Toast.makeText(this, "hellknmllooo", Toast.LENGTH_SHORT).show();
                     startvidos();
                     //  countDownBL.startTimer();
                     // startTimer();
@@ -419,15 +479,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     e.printStackTrace();
                 }
                  */
-
+                    // animation0();
                     animation0();
                     animationBack();
                     viewMainAct.setVisibility(View.VISIBLE);
-                    viewMainAct.setLayoutParams(new LinearLayout.LayoutParams(20, 1050));
+                   viewMainAct.setLayoutParams(new LinearLayout.LayoutParams(200, 1050));
                     layoutStartDialogView.setVisibility(View.GONE);
                     imageViewStartPlay2.setVisibility(View.GONE);
                     imageViewStartPlay.setVisibility(View.GONE);
                     frameLayoutWithVideoInside.setVisibility(View.VISIBLE);
+
                     btnPause.setVisibility(View.VISIBLE);
 
                     //BL PART
@@ -445,21 +506,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.btn_pause_main_activity:
-                //  runNotification();
-                //  startTimerCountDown();
-                //               doWhileMethodForStart();
-                // Toast.makeText(this, "frame ckick", Toast.LENGTH_SHORT).show();
+                //runNotification();
+                //startTimerCountDown();
+                //doWhileMethodForStart();
+                //Toast.makeText(this, "frame ckick", Toast.LENGTH_SHORT).show();
                 stopCountDown();
+
+                   animationZ();
+                 animation0Z();
+                 animationBackZ();
+                //   animationBack20();
                 btnPause.setVisibility(View.GONE);
 
-                viewMainAct.setVisibility(View.VISIBLE);
+                viewMainAct.setVisibility(View.GONE);
+             viewMainAct.setLayoutParams(new LinearLayout.LayoutParams(20, 15*35/*1050*/ ));
                 imageViewStartPlay2.setVisibility(View.GONE);
                 layoutStartDialogView.setVisibility(View.GONE);
-                frameLayoutWithVideoInside.setVisibility(View.GONE);
+                videoView.setVisibility(View.GONE);
+                frameLayoutWithVideoInside.setVisibility(View.VISIBLE);
                 imageViewStartPlay.setVisibility(View.VISIBLE);
 
-                //  imageViewStartPlay.setVisibility(View.VISIBLE);
-                //   frameLayoutWithVideoInside.setVisibility(View.GONE);
 
 
                 //  startService(new Intent(MainActivity.this, MyService.class));
@@ -637,9 +703,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             super.onPostExecute(result);
             //   viewMainAct.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
             viewMainAct.setVisibility(View.GONE);
-            //  linearLayoutLL.setVisibility(View.VISIBLE);
             imageViewStartPlay.setVisibility(View.GONE);
             imageViewStartPlay2.setVisibility(View.VISIBLE);
+            frameLayoutWithVideoInside.setVisibility(View.GONE);
             // linearLayoutLL.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300));
             //frameLayoutWithVideoInside.setVisibility(View.GONE);
             layoutStartDialogView.setVisibility(View.VISIBLE);
@@ -726,18 +792,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 runNotification();
                 //      Toast.makeText(MainActivity.this, "er890ere", Toast.LENGTH_SHORT).show();
                 //  myService.onStartCommand(new Intent(),66,1);
-
             }
 
             public void onFinish() {
-                Toast.makeText(MainActivity.this, "fffiiiiinnnniiiished", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "ff_finished", Toast.LENGTH_SHORT).show();
             }
         }.start();
     }
 
     private void stopCountDown() {
         myCountDownTimer.cancel();
-        Toast.makeText(this, "cancel timer", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "cancel notifications", Toast.LENGTH_SHORT).show();
     }
 
     private void testOfService() {
